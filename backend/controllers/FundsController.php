@@ -133,16 +133,28 @@ class FundsController extends Controller
     {
         $model = $this->findModel($id);
 
+        //Берем сумму до изменения из формы
+        $current_summ = $model->summ;
+
         if ($model->load(Yii::$app->request->post())) {
 
+            $model->date = Funds::DateToTimestamp(Yii::$app->request->post()['Funds']['date']);
 
-            $model->date = Funds::DateToTimestamp($model->date);
+            //Делаем флаг записи в базу баланса
+            $record_to_balance = true;
+
+            //Сравниваем сумму до записи в модель и после
+            if ($model->summ !== $current_summ) {
+                //Если изменилась - записываем и возвращаем значение флагу, если ошибка,  будет false и сообщит об ошибке.
+                $record_to_balance = $this->CalculateCurrentBalance($model->arrival_or_expense, $model->summ);
+            }
 
             //Считаем общую сумму в зависимости от записи
-            if($this->CalculateCurrentBalance($model->arrival_or_expense, $model->summ)) {
+            if($record_to_balance) {
 
                 $model->save();
                 return $this->redirect(['view', 'id' => $model->id, 'date' => $model->date]);
+
             }
             else {
                 return $this->render('update', [
