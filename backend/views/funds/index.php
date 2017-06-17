@@ -12,6 +12,7 @@ use yii\widgets\MaskedInput;
 
 $this->title = 'Движение денежных средств';
 $this->params['breadcrumbs'][] = $this->title;
+
 ?>
 <div class="funds-index">
 
@@ -20,6 +21,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <p>
         <?= Html::a('Создать запись', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Рассчеты', ['calculates'], ['class' => 'btn btn-primary']) ?>
     </p>
 
     <?php
@@ -49,13 +51,16 @@ $this->params['breadcrumbs'][] = $this->title;
                 },
                 'filter' => Funds::СategoriesList(),
             ],
+            'summ',
             'cause',
             [
                 'attribute'=>'date',
                 //'contentOptions' =>['class' => 'table_class','style'=>'display:block;'],
-
+                'content'=>function($data){
+                    return Funds::TimestampToDate($data->date);
+                },
                 'filter' => MaskedInput::widget([
-                    'name' => 'date',
+                    'name' => 'FundsSearch[date]',
                     'mask' => '99.99.9999',
                     ]),
             ],
@@ -65,4 +70,11 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>
+    <div class="container">
+        <div class="information">
+            <div classs="total_summ">
+               <!--Текущий баланс: <?= $balance->total_summ; ?> руб.!-->
+            </div>
+        </div>
+    </div>
 </div>

@@ -51,6 +51,10 @@ class FundsSearch extends Funds
 
         $this->load($params);
 
+        if (!empty($this->date)) {
+            $this->date = parent::DateToTimestamp($this->date);
+        }
+
         if (!$this->validate()) {
             // uncomment the following line if you do not want to return any records when validation fails
             // $query->where('0=1');

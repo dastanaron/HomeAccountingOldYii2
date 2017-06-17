@@ -5,6 +5,8 @@ namespace backend\controllers;
 use Yii;
 use backend\models\Funds;
 use backend\models\FundsSearch;
+use backend\models\FundsFilter;
+use backend\models\CurrentBalance;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -15,6 +17,7 @@ use yii\filters\AccessControl;
  */
 class FundsController extends Controller
 {
+
     /**
      * @inheritdoc
      */
@@ -29,7 +32,7 @@ class FundsController extends Controller
                         'allow' => true,
                     ],
                     [
-                        'actions' => ['logout', 'index', 'view', 'create', 'update'],
+                        'actions' => ['logout', 'index', 'view', 'create', 'update', 'delete', 'calculates'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -56,6 +59,20 @@ class FundsController extends Controller
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'balance' => $this->getCurrentBalanceModel(),
+        ]);
+    }
+
+    public function actionCalculates()
+    {
+        $FilterModel = new FundsFilter();
+        $dataProvider = $FilterModel->search(Yii::$app->request->post());
+
+        return $this->render('calculates', [
+            'FilterModel' =>  $FilterModel,
+            'dataProvider' => $dataProvider,
+            'balance' => $this->getCurrentBalanceModel(),
+            'params' => Yii::$app->request->post(),
         ]);
     }
 
@@ -82,11 +99,23 @@ class FundsController extends Controller
 
         if ($model->load(Yii::$app->request->post())) {
 
+            $model->date = Funds::DateToTimestamp($model->date);
+
             $create_date = new \DateTime();
 
             $model->cr_time = $create_date->format('Y-m-d H:i:s');
-            $model->save();
-            return $this->redirect(['view', 'id' => $model->id]);
+
+            //Считаем общую сумму в зависимости от записи
+            if($this->CalculateCurrentBalance($model->arrival_or_expense, $model->summ)) {
+                $model->save();
+                return $this->redirect(['view', 'id' => $model->id]);
+            }
+            else {
+                return $this->render('create', [
+                    'model' => $model,
+                    'error' => 'Ошибка изменения общей суммы',
+                ]);
+            }
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -104,8 +133,23 @@ class FundsController extends Controller
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($model->load(Yii::$app->request->post())) {
+
+
+            $model->date = Funds::DateToTimestamp($model->date);
+
+            //Считаем общую сумму в зависимости от записи
+            if($this->CalculateCurrentBalance($model->arrival_or_expense, $model->summ)) {
+
+                $model->save();
+                return $this->redirect(['view', 'id' => $model->id, 'date' => $model->date]);
+            }
+            else {
+                return $this->render('update', [
+                    'model' => $model,
+                    'error' => 'Ошибка изменения общей суммы',
+                ]);
+            }
         } else {
             return $this->render('update', [
                 'model' => $model,
@@ -141,4 +185,47 @@ class FundsController extends Controller
             throw new NotFoundHttpException('The requested page does not exist.');
         }
     }
+
+    /**
+     * @return static object
+     */
+    protected function getCurrentBalanceModel() {
+
+        $balance = CurrentBalance::findOne(1);
+
+        return $balance;
+
+    }
+
+    protected function CalculateCurrentBalance($dynamic,$summ) {
+
+        $balance = $this->getCurrentBalanceModel();
+
+        $total_summ = $balance->total_summ;
+
+        if ($dynamic == '1') {
+
+            $balance->total_summ = $total_summ + $summ;
+
+            $balance->save();
+
+        }
+        elseif ($dynamic == '2') {
+
+            $balance->total_summ = $total_summ - $summ;
+
+            $balance->save();
+
+        }
+        else {
+
+            return false;
+
+        }
+
+        return true;
+
+    }
+
+
 }

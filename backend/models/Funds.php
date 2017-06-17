@@ -35,8 +35,8 @@ class Funds extends \yii\db\ActiveRecord
             [['arrival_or_expense', 'category'], 'integer'],
             [['cr_time', 'up_time'], 'safe'],
             [['cause'], 'string', 'max' => 200],
-            [['summ'], 'string', 'max' => 10],
-            [['date'], 'string', 'max' => 10],
+            [['summ'], 'integer'],
+            //[['date'], 'integer', 'max' => 50],
         ];
     }
 
@@ -64,7 +64,7 @@ class Funds extends \yii\db\ActiveRecord
     {
 
         return [
-            0 => 'Приход',
+            0 => '',
             1 => 'Продукты питания',
             2 => 'Питание в столовых и кафе',
             3 => 'Покупки для дома',
@@ -83,9 +83,31 @@ class Funds extends \yii\db\ActiveRecord
     {
 
         return [
+            0 => '',
             1 => 'Приход',
             2 => 'Расход',
         ];
+
+    }
+
+    public static function DateToTimestamp($date) {
+
+        $datetime = new \DateTime($date);
+
+        return $datetime->getTimestamp();
+
+    }
+
+    public static function TimestampToDate($timestamp, $hour = false) {
+
+        if($hour) {
+            $format = 'd.m.Y H:i:s';
+        }
+        else {
+            $format = 'd.m.Y';
+        }
+
+        return date($format, $timestamp);
 
     }
 }

@@ -40,7 +40,10 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             'summ',
             'cause',
-            'date',
+            [
+                'label' => 'Дата',
+                'value' => $model->TimestampToDate($model->date),
+            ],
             'up_time',
             'cr_time',
         ],
