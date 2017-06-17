@@ -7,6 +7,13 @@ use backend\models\Funds;
 /* @var $this yii\web\View */
 /* @var $model backend\models\Funds */
 /* @var $form yii\widgets\ActiveForm */
+
+$date_default = date('d.m.Y');
+
+if(!empty($model->date)) {
+    $date_default = Funds::TimestampToDate($model->date);
+}
+
 ?>
 
 <div class="funds-form">
@@ -23,7 +30,7 @@ use backend\models\Funds;
 
     <?= $form->field($model, 'date')->widget(\yii\widgets\MaskedInput::className(), [
         'mask' => '99.99.9999',
-    ]) ?>
+    ])->textInput(['value' => $date_default]) ?>
 
     <?php
     /*

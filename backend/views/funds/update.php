@@ -18,4 +18,13 @@ $this->params['breadcrumbs'][] = 'Изменить';
         'model' => $model,
     ]) ?>
 
+    <div class="error">
+        <?php
+        if (!empty($error)) {
+
+            echo $error;
+
+        }
+        ?>
+    </div>
 </div>

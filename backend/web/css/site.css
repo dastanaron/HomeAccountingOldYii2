@@ -3,6 +3,10 @@ body {
     height: 100%;
 }
 
+.bold {
+    font-weight: bold;
+}
+
 .wrap {
     min-height: 100%;
     height: auto;
@@ -99,6 +103,10 @@ a.desc:after {
 .nav li > form > button.logout {
     padding: 15px;
     border: none;
+}
+
+.margin-top-80 {
+    margin-top: 80px;
 }
 
 @media(max-width:767px) {
