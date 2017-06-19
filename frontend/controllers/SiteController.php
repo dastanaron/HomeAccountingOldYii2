@@ -80,7 +80,7 @@ class SiteController extends Controller
      *
      * @return mixed
      */
-    /*public function actionLogin()
+    public function actionLogin()
     {
         if (!Yii::$app->user->isGuest) {
             return $this->goHome();
@@ -94,19 +94,19 @@ class SiteController extends Controller
                 'model' => $model,
             ]);
         }
-    }*/
+    }
 
     /**
      * Logs out the current user.
      *
      * @return mixed
      */
-    /*public function actionLogout()
+    public function actionLogout()
     {
         Yii::$app->user->logout();
 
         return $this->goHome();
-    }*/
+    }
 
     /**
      * Displays contact page.
@@ -118,9 +118,9 @@ class SiteController extends Controller
         $model = new ContactForm();
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
             if ($model->sendEmail(Yii::$app->params['adminEmail'])) {
-                Yii::$app->session->setFlash('success', 'Thank you for contacting us. We will respond to you as soon as possible.');
+                Yii::$app->session->setFlash('success', 'Спасибо, что оставили сообщение');
             } else {
-                Yii::$app->session->setFlash('error', 'There was an error sending your message.');
+                Yii::$app->session->setFlash('error', 'Сообщение не может быть отправлено.');
             }
 
             return $this->refresh();
@@ -172,11 +172,11 @@ class SiteController extends Controller
         $model = new PasswordResetRequestForm();
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
             if ($model->sendEmail()) {
-                Yii::$app->session->setFlash('success', 'Check your email for further instructions.');
+                Yii::$app->session->setFlash('success', 'Инструкции по восстановлению, отправлены на E-mail');
 
                 return $this->goHome();
             } else {
-                Yii::$app->session->setFlash('error', 'Sorry, we are unable to reset password for the provided email address.');
+                Yii::$app->session->setFlash('error', 'Извините, мы не нашли ваш адрес в нашей базе, зарегистрированных пользователей');
             }
         }
 
