@@ -31,6 +31,7 @@ if(!empty($model->date)) {
     <?= $form->field($model, 'date')->widget(\yii\widgets\MaskedInput::className(), [
         'mask' => '99.99.9999',
     ])->textInput(['value' => $date_default]) ?>
+    <?= $form->field($model, 'user_id')->hiddenInput(['value'=> Yii::$app->user->getId()])->label(false) ?>
 
     <?php
     /*

@@ -22,6 +22,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <p>
         <?= Html::a('Создать запись', ['create'], ['class' => 'btn btn-success']) ?>
         <?= Html::a('Рассчеты', ['calculates'], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('Текущий баланс', ['currentbalance'], ['class' => 'btn btn-primary']) ?>
     </p>
 
     <?php
@@ -72,9 +73,7 @@ $this->params['breadcrumbs'][] = $this->title;
     ]); ?>
     <div class="container">
         <div class="information">
-            <div classs="total_summ">
-               <!--Текущий баланс: <?= $balance->total_summ; ?> руб.!-->
-            </div>
+
         </div>
     </div>
 </div>

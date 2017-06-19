@@ -64,6 +64,7 @@ class FundsSearch extends Funds
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
+            'user_id' =>  Yii::$app->user->getId(),
             'arrival_or_expense' => $this->arrival_or_expense,
             'category' => $this->category,
             'summ' => $this->summ,

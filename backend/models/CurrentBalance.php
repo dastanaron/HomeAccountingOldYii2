@@ -8,6 +8,7 @@ use Yii;
  * This is the model class for table "current_balance".
  *
  * @property integer $id
+ * @property integer $user_id
  * @property integer $summ_income
  * @property integer $summ_consumption
  * @property integer $total_summ
@@ -29,7 +30,7 @@ class CurrentBalance extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['summ_income', 'summ_consumption', 'total_summ'], 'integer'],
+            [['summ_income', 'summ_consumption', 'total_summ', 'user_id'], 'integer'],
             [['up_time'], 'safe'],
         ];
     }

@@ -8,6 +8,7 @@ use Yii;
  * This is the model class for table "funds".
  *
  * @property integer $id
+ * @property integer $user_id
  * @property integer $arrival_or_expense
  * @property integer $category
  * @property string $cause
@@ -31,8 +32,8 @@ class Funds extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['arrival_or_expense', 'summ', 'cr_time'], 'required'],
-            [['arrival_or_expense', 'category'], 'integer'],
+            [['arrival_or_expense', 'summ', 'cr_time', 'user_id'], 'required'],
+            [['arrival_or_expense', 'category', 'user_id'], 'integer'],
             [['cr_time', 'up_time'], 'safe'],
             [['cause'], 'string', 'max' => 200],
             [['summ'], 'integer'],

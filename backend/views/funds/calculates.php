@@ -13,7 +13,7 @@ use backend\assets\CalculateAsset;
 $this->title = 'Рассчетные данные';
 $this->params['breadcrumbs'][] = ['label' => 'Движение денежных средств', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
-// $formName === null ? $this->formName() : $formName
+
 CalculateAsset::register($this);
 ?>
 <div class="funds-index">
@@ -26,7 +26,14 @@ CalculateAsset::register($this);
                 <div class="current-total-summ">
                     <div class="summ-info">Текущий баланс:</div>
                     <div class="summ-result">
-                        <?= $balance->total_summ;?>
+                        <?php
+                        if (is_object($balance)) {
+                            echo $balance->total_summ;
+                        }
+                        else {
+                            echo $balance;
+                        }
+                        ?>
                     </div>
                 </div>
             </div>

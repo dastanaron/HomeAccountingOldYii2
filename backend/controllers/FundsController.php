@@ -32,7 +32,7 @@ class FundsController extends Controller
                         'allow' => true,
                     ],
                     [
-                        'actions' => ['logout', 'index', 'view', 'create', 'update', 'delete', 'calculates'],
+                        'actions' => ['logout', 'index', 'view', 'create', 'update', 'delete', 'calculates', 'currentbalance'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -74,6 +74,24 @@ class FundsController extends Controller
             'balance' => $this->getCurrentBalanceModel(),
             'params' => Yii::$app->request->post(),
         ]);
+    }
+
+    public function actionCurrentbalance() {
+
+        $model = $this->getCurrentBalanceModel();
+
+        if (!is_object($model)){
+            $model = new CurrentBalance();
+        }
+
+        if ($model->load(Yii::$app->request->post())) {
+            $model->save();
+        }
+
+        return $this->render('currentbalance', [
+            'model' => $model,
+        ]);
+
     }
 
     /**
@@ -191,7 +209,7 @@ class FundsController extends Controller
      */
     protected function findModel($id)
     {
-        if (($model = Funds::findOne($id)) !== null) {
+        if (($model = Funds::findOne(['id'=>$id, 'user_id'=>Yii::$app->user->getId()])) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
@@ -203,9 +221,16 @@ class FundsController extends Controller
      */
     protected function getCurrentBalanceModel() {
 
-        $balance = CurrentBalance::findOne(1);
+        $balance = CurrentBalance::findOne(['user_id' =>  Yii::$app->user->getId()]);
 
-        return $balance;
+        if(!empty($balance)) {
+
+            return $balance;
+
+        }
+        else {
+            return 'Нет данных';
+        }
 
     }
 
