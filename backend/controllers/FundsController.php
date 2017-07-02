@@ -240,6 +240,10 @@ class FundsController extends Controller
 
         $total_summ = $balance->total_summ;
 
+        if(empty($total_summ)) {
+            $total_summ = 0;
+        }
+
         if ($dynamic == '1') {
 
             $balance->total_summ = $total_summ + $summ;
