@@ -40,6 +40,12 @@ AppAsset::register($this);
         ['label' => 'О сайте', 'url' => ['/site/about']],
         ['label' => 'Контакты', 'url' => ['/site/contact']],
     ];
+    $menuItems[] =
+        ['label' => 'Разделы языка', 'items' => [
+                ['label' => 'php', 'url' => ['/php']],
+                ['label' => 'JavaScript', 'url' => ['/javascriptlang']],
+            ],
+        ];
     if (Yii::$app->user->isGuest) {
      //   $menuItems[] = ['label' => 'Регистрация', 'url' => ['/site/signup']];
         $menuItems[] = ['label' => 'Вход', 'url' => ['/site/login']];
