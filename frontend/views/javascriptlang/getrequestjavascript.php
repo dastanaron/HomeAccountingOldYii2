@@ -10,6 +10,9 @@ CodeAsset::register($this);
 $this->title = 'GET параметры в JavaScript';
 $this->params['breadcrumbs'][] = ['label' => 'JavaScript', 'url' => ['/javascriptlang']];
 $this->params['breadcrumbs'][] = $this->title;
+
+$this->registerMetaTag(['description' => Yii::$app->params['descriptions']['js']['getrequestjavascript']]);
+
 ?>
 <div class="js">
     <h1>GET параметры в JavaScript</h1>

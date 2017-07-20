@@ -10,6 +10,9 @@ CodeAsset::register($this);
 $this->title = 'Определитель браузера';
 $this->params['breadcrumbs'][] = ['label' => 'JavaScript', 'url' => ['/javascriptlang']];
 $this->params['breadcrumbs'][] = $this->title;
+
+$this->registerMetaTag(['description' => Yii::$app->params['descriptions']['js']['browserdetect']]);
+
 ?>
 <div class="js">
     <h1>Определитель браузераt</h1>
