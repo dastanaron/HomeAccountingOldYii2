@@ -15,7 +15,7 @@ $this->registerMetaTag(['description' => Yii::$app->params['descriptions']['js']
 
 ?>
 <div class="js">
-    <h1>Определитель браузераt</h1>
+    <h1>Определитель браузера</h1>
 </div>
 
 <div class="description-code-block">

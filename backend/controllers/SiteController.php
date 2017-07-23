@@ -64,6 +64,16 @@ class SiteController extends Controller
     }
 
     /**
+     * Displays homepage.
+     *
+     * @return string
+     */
+    public function actionVk()
+    {
+        return $this->render('vk');
+    }
+
+    /**
      * Login action.
      *
      * @return string

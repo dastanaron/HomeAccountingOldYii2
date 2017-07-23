@@ -141,6 +141,15 @@ class SiteController extends Controller
         return $this->render('about');
     }
 
+
+    /**
+     *
+     * @return mixed
+     */
+    public function actionCallbackvk()
+    {
+        return $this->render('callbackvk');
+    }
     /**
      * Signs user up.
      *
