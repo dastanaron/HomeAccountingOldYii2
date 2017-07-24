@@ -148,7 +148,13 @@ class SiteController extends Controller
      */
     public function actionCallbackvk()
     {
+        $this->layout = 'empty';
         return $this->render('callbackvk');
+    }
+
+    public function beforeAction($action) {
+        $this->enableCsrfValidation = ($action->id !== "callbackvk");
+        return parent::beforeAction($action);
     }
     /**
      * Signs user up.

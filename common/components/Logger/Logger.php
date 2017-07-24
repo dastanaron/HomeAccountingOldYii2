@@ -1,5 +1,7 @@
 <?php
 
+namespace common\components\Logger;
+
 class Logger {
 
     public static $logname = 'log.log';
