@@ -117,7 +117,7 @@ class BotScenario {
 
     public static function UndefinedCommand($user_id)
     {
-        self::$vk_api->SendMessageUser($user_id, 'Неизвестная команда', self::$peer);
+        self::$vk_api->SendMessageUser($user_id, 'Неизвестная команда, попробуйте написать: Помощь', self::$peer);
 
         logger::Log('Отправлена информация об ошибке команды' . self::$vk_api->APIExecute());
     }
