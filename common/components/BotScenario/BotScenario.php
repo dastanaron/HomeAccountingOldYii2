@@ -33,6 +33,8 @@ class BotScenario {
         текущий баланс - пришлет вам текущий баланс в системе
         категории расходов - пришлет список категорий, которые на данный момент используются в программе
         расход [название категории] - без скобок и название как в присылаемом списке, вернет вам значение расходов по текущей категории
+        доход за период с [дата] по [дата] - доход за период входящий в указанные даты (вводить без скобок в привычном формате).
+        доход - выведет сумму доходов за текущий месяц, с его начала
         ';
 
         self::$vk_api->SendMessageUser($user_id, $message, self::$peer);
@@ -89,6 +91,20 @@ class BotScenario {
         self::$vk_api->SendMessageUser($user_id, 'По категории "'.$categoryname.'" сумма расходов за текущий месяц составила: '.$sum.' руб.', self::$peer);
 
         logger::Log('Отправлена информация о расходе по категории' . self::$vk_api->APIExecute());
+    }
+
+    public static function IncomeSum($user_id, $sum)
+    {
+        self::$vk_api->SendMessageUser($user_id, 'Сумма доходов за текущий месяц составила: '.$sum.' руб.', self::$peer);
+
+        logger::Log('Отправлена информация о доходе' . self::$vk_api->APIExecute());
+    }
+
+    public static function IncomeSumPeriod($user_id, $sum, $match)
+    {
+        self::$vk_api->SendMessageUser($user_id, 'Сумма доходов за период с '.$match[1].' по '.$match[2].' составляет: '.$sum.' руб.', self::$peer);
+
+        logger::Log('Отправлена информация о доходе' . self::$vk_api->APIExecute());
     }
 
     /**

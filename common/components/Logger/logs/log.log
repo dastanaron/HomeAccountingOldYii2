@@ -275,3 +275,38 @@
 25.07.2017|19:01:29| Принято сообщение от ВК: {"type":"message_new","object":{"id":223,"date":1500998488,"out":0,"user_id":219981829,"read_state":0,"title":" ... ","body":"расход"},"group_id":150773608,"secret":"privettebeotdyadykuziunegohrennapuze"}|
 25.07.2017|19:01:44| Принято сообщение от ВК: {"type":"message_new","object":{"id":224,"date":1500998503,"out":0,"user_id":219981829,"read_state":0,"title":" ... ","body":"hfc[jl"},"group_id":150773608,"secret":"privettebeotdyadykuziunegohrennapuze"}|
 25.07.2017|19:01:46| Принято сообщение от ВК: {"type":"message_new","object":{"id":225,"date":1500998505,"out":0,"user_id":219981829,"read_state":0,"title":" ... ","body":"расход"},"group_id":150773608,"secret":"privettebeotdyadykuziunegohrennapuze"}|
+25.07.2017|19:10:32| Принято сообщение от ВК: {"type":"message_new","object":{"id":226,"date":1500999032,"out":0,"user_id":219981829,"read_state":0,"title":" ... ","body":"текущий баланс"},"group_id":150773608,"secret":"privettebeotdyadykuziunegohrennapuze"}|
+25.07.2017|19:10:32| Отправлена информация о балансе: {"response":227}|
+25.07.2017|19:11:16| Принято сообщение от ВК: {"type":"message_new","object":{"id":228,"date":1500999075,"out":0,"user_id":219981829,"read_state":0,"title":" ... ","body":"помощь"},"group_id":150773608,"secret":"privettebeotdyadykuziunegohrennapuze"}|
+25.07.2017|19:11:16| Отправлен ответ: {"response":229}|
+25.07.2017|22:13:21| Принято сообщение от ВК: {"type":"message_new","object":{"id":230,"date":1501010000,"out":0,"user_id":219981829,"read_state":0,"title":" ... ","body":"категория расходов"},"group_id":150773608,"secret":"privettebeotdyadykuziunegohrennapuze"}|
+25.07.2017|22:13:30| Принято сообщение от ВК: {"type":"message_new","object":{"id":231,"date":1501010009,"out":0,"user_id":219981829,"read_state":0,"title":" ... ","body":"категории расходов"},"group_id":150773608,"secret":"privettebeotdyadykuziunegohrennapuze"}|
+25.07.2017|22:13:30| Отправлена информация о категориях расходов{"response":232}|
+25.07.2017|22:13:37| Принято сообщение от ВК: {"type":"message_new","object":{"id":233,"date":1501010016,"out":0,"user_id":219981829,"read_state":0,"title":" ... ","body":"расход Занял"},"group_id":150773608,"secret":"privettebeotdyadykuziunegohrennapuze"}|
+25.07.2017|22:13:37| Отправлена информация о расходе по категории{"response":234}|
+25.07.2017|22:13:48| Принято сообщение от ВК: {"type":"message_new","object":{"id":235,"date":1501010028,"out":0,"user_id":219981829,"read_state":0,"title":" ... ","body":"расход Одежда и обувь"},"group_id":150773608,"secret":"privettebeotdyadykuziunegohrennapuze"}|
+25.07.2017|22:13:49| Отправлена информация о расходе по категории{"response":236}|
+25.07.2017|22:14:11| Принято сообщение от ВК: {"type":"message_new","object":{"id":237,"date":1501010050,"out":0,"user_id":219981829,"read_state":0,"title":" ... ","body":"Расход Здоровье"},"group_id":150773608,"secret":"privettebeotdyadykuziunegohrennapuze"}|
+25.07.2017|22:14:11| Отправлена информация о расходе по категории{"response":238}|
+25.07.2017|22:14:47| Принято сообщение от ВК: {"type":"message_new","object":{"id":239,"date":1501010086,"out":0,"user_id":219981829,"read_state":0,"title":" ... ","body":"Расход Здоровье"},"group_id":150773608,"secret":"privettebeotdyadykuziunegohrennapuze"}|
+25.07.2017|22:14:47| Отправлена информация о расходе по категории{"response":240}|
+25.07.2017|22:14:58| Принято сообщение от ВК: {"type":"message_new","object":{"id":241,"date":1501010098,"out":0,"user_id":219981829,"read_state":0,"title":" ... ","body":"Расход Одежда и обувь"},"group_id":150773608,"secret":"privettebeotdyadykuziunegohrennapuze"}|
+25.07.2017|22:14:58| Отправлена информация о расходе по категории{"response":242}|
+25.07.2017|22:15:32| Принято сообщение от ВК: {"type":"message_new","object":{"id":243,"date":1501010131,"out":0,"user_id":219981829,"read_state":0,"title":" ... ","body":"расход одежда и обувь"},"group_id":150773608,"secret":"privettebeotdyadykuziunegohrennapuze"}|
+25.07.2017|22:15:33| Отправлена информация о расходе по категории{"response":244}|
+25.07.2017|22:15:39| Принято сообщение от ВК: {"type":"message_new","object":{"id":245,"date":1501010139,"out":0,"user_id":219981829,"read_state":0,"title":" ... ","body":"расход Одежда и обувь"},"group_id":150773608,"secret":"privettebeotdyadykuziunegohrennapuze"}|
+25.07.2017|22:15:39| Отправлена информация о расходе по категории{"response":246}|
+25.07.2017|22:16:02| Принято сообщение от ВК: {"type":"message_new","object":{"id":247,"date":1501010162,"out":0,"user_id":219981829,"read_state":0,"title":" ... ","body":"расход Здоровье"},"group_id":150773608,"secret":"privettebeotdyadykuziunegohrennapuze"}|
+25.07.2017|22:16:02| Отправлена информация о расходе по категории{"response":248}|
+25.07.2017|22:21:18| Принято сообщение от ВК: {"type":"message_new","object":{"id":249,"date":1501010478,"out":0,"user_id":219981829,"read_state":0,"title":" ... ","body":"доход"},"group_id":150773608,"secret":"privettebeotdyadykuziunegohrennapuze"}|
+25.07.2017|22:21:18| Отправлена информация о доходе{"response":250}|
+25.07.2017|22:22:08| Принято сообщение от ВК: {"type":"message_new","object":{"id":251,"date":1501010527,"out":0,"user_id":219981829,"read_state":0,"title":" ... ","body":"доход"},"group_id":150773608,"secret":"privettebeotdyadykuziunegohrennapuze"}|
+25.07.2017|22:22:08| Отправлена информация о доходе{"response":252}|
+25.07.2017|22:22:51| Принято сообщение от ВК: {"type":"message_new","object":{"id":253,"date":1501010571,"out":0,"user_id":219981829,"read_state":0,"title":" ... ","body":"доход"},"group_id":150773608,"secret":"privettebeotdyadykuziunegohrennapuze"}|
+25.07.2017|22:22:51| Отправлена информация о доходе{"response":254}|
+25.07.2017|22:29:36| Принято сообщение от ВК: {"type":"message_new","object":{"id":255,"date":1501010975,"out":0,"user_id":219981829,"read_state":0,"title":" ... ","body":"доход за период с 27.06.2017 по 25.07.2017"},"group_id":150773608,"secret":"privettebeotdyadykuziunegohrennapuze"}|
+25.07.2017|22:29:36| Отправлена информация о доходе{"response":256}|
+25.07.2017|22:30:19| Принято сообщение от ВК: {"type":"message_new","object":{"id":257,"date":1501011018,"out":0,"user_id":219981829,"read_state":0,"title":" ... ","body":"доход за период с 27.06.2017 по 25.07.2017"},"group_id":150773608,"secret":"privettebeotdyadykuziunegohrennapuze"}|
+25.07.2017|22:30:19| Отправлена информация о доходе{"response":258}|
+25.07.2017|22:30:56| Принято сообщение от ВК: {"type":"message_new","object":{"id":259,"date":1501011056,"out":0,"user_id":219981829,"read_state":0,"title":" ... ","body":"доход"},"group_id":150773608,"secret":"privettebeotdyadykuziunegohrennapuze"}|
+25.07.2017|22:30:57| Отправлена информация о доходе{"response":260}|

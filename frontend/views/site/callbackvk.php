@@ -160,6 +160,66 @@ if (!empty($request)) {
                 BotScenario::UserNotFound($request_array['object']['user_id']);
             }
         }
+        else if (preg_match('#доход за период с (.*) по (.*)#', $request_array['object']['body'])) {
+            //Ищем юзера с таким vk_id
+            $user = $user_model->findOne(['vk_id'=>$request_array['object']['user_id']]);
+
+            if(!empty($user)) {
+
+                //вытаскиваем период
+                preg_match('#доход за период с (.*) по (.*)#', $request_array['object']['body'], $match);
+
+                $start_date = new DateTime($match[1]);
+                $end_date = new DateTime($match[2]);
+
+                //Получаем дату начала месяца
+                $date_month_start = new \DateTime(date('Y-m-01'));
+
+                $incomes = $funds_model->find()
+                    ->where(['arrival_or_expense'=>1])
+                    ->andWhere(['>=', 'date', $start_date->getTimestamp()])
+                    ->andWhere(['<=', 'date', $end_date->getTimestamp()+86400])
+                    ->all();
+
+                $sum = 0;
+
+                foreach ($incomes as $income){
+
+                    $sum += $income->summ;
+
+                }
+
+                BotScenario::IncomeSumPeriod($request_array['object']['user_id'], $sum, $match);
+            }
+            else {
+                BotScenario::UserNotFound($request_array['object']['user_id']);
+            }
+        }
+        else if (preg_match('#доход#', $request_array['object']['body'])) {
+            //Ищем юзера с таким vk_id
+            $user = $user_model->findOne(['vk_id'=>$request_array['object']['user_id']]);
+
+            if(!empty($user)) {
+
+                //Получаем дату начала месяца
+                $date_month_start = new \DateTime(date('Y-m-01'));
+
+                $incomes = $funds_model->find()->where(['arrival_or_expense'=>1])->andWhere(['>=', 'date', $date_month_start->getTimestamp()])->all();
+
+                $sum = 0;
+
+                foreach ($incomes as $income){
+
+                    $sum += $income->summ;
+
+                }
+
+                BotScenario::IncomeSum($request_array['object']['user_id'], $sum);
+            }
+            else {
+                BotScenario::UserNotFound($request_array['object']['user_id']);
+            }
+        }
 
     }
 
