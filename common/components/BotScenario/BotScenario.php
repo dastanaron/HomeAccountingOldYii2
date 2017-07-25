@@ -22,11 +22,11 @@ class BotScenario {
             return false;
         }
 
-        $message = '
+        $message1 = '
         Для начала работы с ботом, вам необходимо пройти регистрацию в системе http://frserver.ru
         Далее вам необходимо зарегистрировать этого бота, отправив ему сообщение
-         с текстом: регистрация ваш_логин пароль - в системе frserver.ru
-        '.PHP_EOL.'
+         с текстом: регистрация ваш_логин пароль - в системе frserver.ru';
+        $message2 = '
         Список доступных комманд:
         Помощь - выведет это сообщение
         Регистрация - регистрирует пользователя, как описано выше
@@ -37,9 +37,17 @@ class BotScenario {
         Доход - выведет сумму доходов за текущий месяц, с его начала
         ';
 
-        self::$vk_api->SendMessageUser($user_id, $message, self::$peer);
+        self::$vk_api->SendMessageUser($user_id, $message1, self::$peer);
 
-        logger::Log('Отправлен ответ: ' . self::$vk_api->APIExecute());
+        self::$vk_api->APIExecute();
+
+        self::$vk_api->ClearAPI();
+
+        self::$vk_api->SendMessageUser($user_id, $message2, self::$peer);
+
+        self::$vk_api->APIExecute();
+
+        logger::Log('Отправлен ответ с инструкцией');
 
     }
 
@@ -105,6 +113,13 @@ class BotScenario {
         self::$vk_api->SendMessageUser($user_id, 'Сумма доходов за период с '.$match[1].' по '.$match[2].' составляет: '.$sum.' руб.', self::$peer);
 
         logger::Log('Отправлена информация о доходе' . self::$vk_api->APIExecute());
+    }
+
+    public static function UndefinedCommand($user_id)
+    {
+        self::$vk_api->SendMessageUser($user_id, 'Неизвестная команда', self::$peer);
+
+        logger::Log('Отправлена информация об ошибке команды' . self::$vk_api->APIExecute());
     }
 
     /**

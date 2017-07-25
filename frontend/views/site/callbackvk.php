@@ -89,8 +89,8 @@ if (!empty($request)) {
             if(!empty($user)) {
 
                 $balance = $balance_model->findOne(['user_id'=>$user->id]);
-
-                BotScenario::CurrentBalance($request_array['object']['user_id'], $balance->total_summ);
+                VarDumper::dump($request_array['object'], 10, true);
+                //BotScenario::CurrentBalance($request_array['object']['user_id'], $balance->total_summ);
             }
             else {
                 BotScenario::UserNotFound($request_array['object']['user_id']);
@@ -219,6 +219,9 @@ if (!empty($request)) {
             else {
                 BotScenario::UserNotFound($request_array['object']['user_id']);
             }
+        }
+        else {
+            BotScenario::UndefinedCommand($request_array['object']['user_id']);
         }
 
     }
