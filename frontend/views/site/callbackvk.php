@@ -43,16 +43,16 @@ if (!empty($request)) {
         //модель баланса
         $balance_model = new CurrentBalance();
 
-        if (preg_match('#помощь#', $request_array['object']['body'])) {
+        if (preg_match('#Помощь#', $request_array['object']['body'])) {
 
             //Отправляем приветствие
             BotScenario::hello($request_array['object']['user_id']);
 
         }
-        else if (preg_match('#регистрация#', $request_array['object']['body'])) {
+        else if (preg_match('#Регистрация#', $request_array['object']['body'])) {
 
             //При запросе регистрации вычленяем логин и пароль
-           preg_match('#регистрация (.*) (.*)#', $request_array['object']['body'], $match);
+           preg_match('#Регистрация (.*) (.*)#', $request_array['object']['body'], $match);
 
 
             //Ищем юзера с таким логином
@@ -81,7 +81,7 @@ if (!empty($request)) {
 
         }
         //Если получаем запрос текущего баланса
-        else if (preg_match('#текущий баланс#',  $request_array['object']['body'])) {
+        else if (preg_match('#Текущий баланс#',  $request_array['object']['body'])) {
 
             //Ищем юзера с таким vk_id
             $user = $user_model->findOne(['vk_id'=>$request_array['object']['user_id']]);
@@ -98,7 +98,7 @@ if (!empty($request)) {
 
         }
         //Если получаем запрос категорий
-        else if (preg_match('#категории расходов#',  $request_array['object']['body'])) {
+        else if (preg_match('#Категории расходов#',  $request_array['object']['body'])) {
 
             //Ищем юзера с таким vk_id
             $user = $user_model->findOne(['vk_id'=>$request_array['object']['user_id']]);
@@ -126,7 +126,7 @@ if (!empty($request)) {
 
         }
         //Расход по категории
-        else if (preg_match('#расход (.*)#', $request_array['object']['body'])) {
+        else if (preg_match('#Расход (.*)#', $request_array['object']['body'])) {
 
             //Ищем юзера с таким vk_id
             $user = $user_model->findOne(['vk_id'=>$request_array['object']['user_id']]);
@@ -134,7 +134,7 @@ if (!empty($request)) {
             if(!empty($user)) {
 
                 //Ищем категорию сначала в выражении потом в массиве
-                preg_match('#расход (.*)#', $request_array['object']['body'], $match);
+                preg_match('#Расход (.*)#', $request_array['object']['body'], $match);
 
                 $category = array_search($match[1], Funds::СategoriesList());
 
@@ -160,14 +160,14 @@ if (!empty($request)) {
                 BotScenario::UserNotFound($request_array['object']['user_id']);
             }
         }
-        else if (preg_match('#доход за период с (.*) по (.*)#', $request_array['object']['body'])) {
+        else if (preg_match('#Доход за период с (.*) по (.*)#', $request_array['object']['body'])) {
             //Ищем юзера с таким vk_id
             $user = $user_model->findOne(['vk_id'=>$request_array['object']['user_id']]);
 
             if(!empty($user)) {
 
                 //вытаскиваем период
-                preg_match('#доход за период с (.*) по (.*)#', $request_array['object']['body'], $match);
+                preg_match('#Доход за период с (.*) по (.*)#', $request_array['object']['body'], $match);
 
                 $start_date = new DateTime($match[1]);
                 $end_date = new DateTime($match[2]);
@@ -195,7 +195,7 @@ if (!empty($request)) {
                 BotScenario::UserNotFound($request_array['object']['user_id']);
             }
         }
-        else if (preg_match('#доход#', $request_array['object']['body'])) {
+        else if (preg_match('#Доход#', $request_array['object']['body'])) {
             //Ищем юзера с таким vk_id
             $user = $user_model->findOne(['vk_id'=>$request_array['object']['user_id']]);
 
