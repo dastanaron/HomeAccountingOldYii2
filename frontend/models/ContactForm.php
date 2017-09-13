@@ -24,7 +24,7 @@ class ContactForm extends Model
     {
         return [
             // name, email, subject and body are required
-            [['name', 'email', 'subject', 'body'], 'required'],
+            [['name', 'body'], 'required'],
             // email has to be a valid email address
             ['email', 'email'],
             // verifyCode needs to be entered correctly
@@ -54,11 +54,23 @@ class ContactForm extends Model
      */
     public function sendEmail($email)
     {
+        if(empty($this->subject)) {
+            $this->subject = 'Без темы';
+        }
+
+        $body = '
+        <table border="1" style="border-collapse: collapse">
+            <tr><td>Имя:</td><td>'.$this->name.'</td></tr>
+            <tr><td>E-mail:</td><td>'.$this->email.'</td></tr>
+            <tr><td>Сообщение:</td><td>'.$this->body.'</td></tr>
+        </table>
+        ';
+
         return Yii::$app->mailer->compose()
             ->setTo($email)
-            ->setFrom([$this->email => $this->name])
+            ->setFrom('flow199@yandex.ru')
             ->setSubject($this->subject)
-            ->setTextBody($this->body)
+            ->setHtmlBody($body)
             ->send();
     }
 }
