@@ -41,7 +41,8 @@ return [
             'showScriptName' => false,
             'rules' => [
                 ''=>'site/index',
-                'callbackvk' => 'site/callbackvk'
+                'callbackvk' => 'site/callbackvk',
+                'cronevents' => 'site/cronevents',
                 //'<action>'=>'site/<action>',
             ],
         ],
