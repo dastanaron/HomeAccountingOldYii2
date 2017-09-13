@@ -3,7 +3,7 @@ return [
     'adminEmail' => 'admin@example.com',
     'descriptions' => [
         'php' => [
-
+            'vkbot' => 'Бот для ВК. Описание класса, примеры',
         ],
         'js' => [
             'browserdetect' => 'JavaScript определитель браузера, версии и системы, с объяснением работы',

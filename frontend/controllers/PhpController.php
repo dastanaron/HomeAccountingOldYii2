@@ -70,4 +70,15 @@ class PhpController extends Controller
         return $this->render('index');
     }
 
+    /**
+     * Displays vkbot page
+     *
+     * @return mixed
+     */
+    public function actionVkbot()
+    {
+        return $this->render('vkbot');
+    }
+
+
 }
