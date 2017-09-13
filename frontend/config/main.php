@@ -42,7 +42,6 @@ return [
             'rules' => [
                 ''=>'site/index',
                 'callbackvk' => 'site/callbackvk',
-                'cronevents' => 'site/cronevents',
                 //'<action>'=>'site/<action>',
             ],
         ],
