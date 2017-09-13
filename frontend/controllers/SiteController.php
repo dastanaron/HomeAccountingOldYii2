@@ -164,6 +164,7 @@ class SiteController extends Controller
 
     public function beforeAction($action) {
         $this->enableCsrfValidation = ($action->id !== "callbackvk");
+        $this->enableCsrfValidation = ($action->id !== "cronevents");
         return parent::beforeAction($action);
     }
     /**
