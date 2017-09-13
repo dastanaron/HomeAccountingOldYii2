@@ -79,6 +79,8 @@ class CronController extends Controller
             }
         }
 
+        Logger::Log('======Script END =======');
+
     }
 
 
