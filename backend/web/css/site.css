@@ -108,7 +108,6 @@ a.desc:after {
 .margin-top-80 {
     margin-top: 80px;
 }
-
 @media(max-width:767px) {
     .nav li > form > button.logout {
         display:block;
