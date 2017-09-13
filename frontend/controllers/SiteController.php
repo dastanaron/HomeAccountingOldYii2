@@ -152,6 +152,16 @@ class SiteController extends Controller
         return $this->render('callbackvk');
     }
 
+    /**
+     *
+     * @return mixed
+     */
+    public function actionCronevents()
+    {
+        $this->layout = 'empty';
+        return $this->render('cronevents');
+    }
+
     public function beforeAction($action) {
         $this->enableCsrfValidation = ($action->id !== "callbackvk");
         return parent::beforeAction($action);

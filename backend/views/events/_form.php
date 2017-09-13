@@ -10,6 +10,18 @@ use yii\widgets\ActiveForm;
 
 <div class="events-form">
 
+    <?php
+
+
+    if (empty($model->date_notification)) {
+        $default_date = new \DateTime();
+    }
+    else {
+        $default_date = new \DateTime($model->date_notification);
+    }
+
+    ?>
+
     <?php $form = ActiveForm::begin(); ?>
 
     <?= $form->field($model, 'user_id')->hiddenInput(['value'=> Yii::$app->user->getId()])->label(false) ?>
@@ -22,7 +34,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'date_notification')->widget(\yii\widgets\MaskedInput::className(), [
         'mask' => '99.99.9999 99:99:00',
-    ])->textInput(['value' => $date_default]) ?>
+    ])->textInput(['value' => $default_date->format('d.m.Y Hi:s')]) ?>
 
     <?php
 

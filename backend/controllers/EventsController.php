@@ -65,7 +65,9 @@ class EventsController extends Controller
     {
         $model = new Events();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post())) {
+            $model->date_notification = $this->ConvertDateToBase($model->date_notification);
+            $model->save();
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
@@ -84,7 +86,9 @@ class EventsController extends Controller
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post())) {
+            $model->date_notification = $this->ConvertDateToBase($model->date_notification);
+            $model->save();
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('update', [
@@ -121,4 +125,12 @@ class EventsController extends Controller
             throw new NotFoundHttpException('The requested page does not exist.');
         }
     }
+
+    public function ConvertDateToBase($date)
+    {
+        $date = new \DateTime($date);
+
+        return $date->format('Y-m-d H:i:s');
+    }
+
 }
