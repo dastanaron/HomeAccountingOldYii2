@@ -79,3 +79,21 @@
 30.08.2017|22:00:37| Отправлен ответ с инструкцией|
 30.08.2017|22:00:48| Принято сообщение от ВК: {"type":"message_new","object":{"id":362,"date":1504119648,"out":0,"user_id":219981829,"read_state":0,"title":" ... ","body":"Расход Здоровье"},"group_id":150773608,"secret":"privettebeotdyadykuziunegohrennapuze"}|
 30.08.2017|22:00:48| Отправлена информация о расходе по категории{"response":363}|
+14.09.2017|02:11:37| Принято сообщение от ВК: {"type":"message_new","object":{"id":372,"date":1505343830,"out":0,"user_id":219981829,"read_state":0,"title":"","body":"Расход Развлечения"},"group_id":150773608,"secret":"privettebeotdyadykuziunegohrennapuze"}|
+14.09.2017|02:11:37| Отправлена информация о расходе по категории{"response":378}|
+14.09.2017|02:12:10| Принято сообщение от ВК: {"type":"message_new","object":{"id":379,"date":1505344329,"out":0,"user_id":219981829,"read_state":0,"title":"","body":"Расход Развлечения"},"group_id":150773608,"secret":"privettebeotdyadykuziunegohrennapuze"}|
+14.09.2017|02:12:10| Отправлена информация о расходе по категории{"response":380}|
+14.09.2017|02:17:41| Принято сообщение от ВК: {"type":"message_new","object":{"id":371,"date":1505343818,"out":0,"user_id":219981829,"read_state":0,"title":"","body":"Расход развлечения"},"group_id":150773608,"secret":"privettebeotdyadykuziunegohrennapuze"}|
+14.09.2017|02:17:41| Отправлена информация о расходе по категории{"response":381}|
+14.09.2017|02:17:52| Принято сообщение от ВК: {"type":"message_new","object":{"id":372,"date":1505343830,"out":0,"user_id":219981829,"read_state":0,"title":"","body":"Расход Развлечения"},"group_id":150773608,"secret":"privettebeotdyadykuziunegohrennapuze"}|
+14.09.2017|02:17:52| Отправлена информация о расходе по категории{"response":382}|
+14.09.2017|02:18:12| Принято сообщение от ВК: {"type":"message_new","object":{"id":373,"date":1505343850,"out":0,"user_id":219981829,"read_state":0,"title":"","body":"Категории расходов"},"group_id":150773608,"secret":"privettebeotdyadykuziunegohrennapuze"}|
+14.09.2017|02:18:12| Отправлена информация о категориях расходов{"response":383}|
+14.09.2017|02:18:36| Принято сообщение от ВК: {"type":"message_new","object":{"id":384,"date":1505344716,"out":0,"user_id":219981829,"read_state":0,"title":"","body":"Помощь"},"group_id":150773608,"secret":"privettebeotdyadykuziunegohrennapuze"}|
+14.09.2017|02:18:37| Отправлен ответ с инструкцией|
+14.09.2017|02:19:38| Принято сообщение от ВК: {"type":"message_new","object":{"id":375,"date":1505343935,"out":0,"user_id":219981829,"read_state":0,"title":"","body":"Помощь"},"group_id":150773608,"secret":"privettebeotdyadykuziunegohrennapuze"}|
+14.09.2017|02:19:38| Отправлен ответ с инструкцией|
+14.09.2017|02:20:35| Принято сообщение от ВК: {"type":"message_new","object":{"id":376,"date":1505343993,"out":0,"user_id":219981829,"read_state":0,"title":"","body":"Помощь"},"group_id":150773608,"secret":"privettebeotdyadykuziunegohrennapuze"}|
+14.09.2017|02:20:36| Отправлен ответ с инструкцией|
+14.09.2017|02:25:01| Принято сообщение от ВК: {"type":"message_new","object":{"id":391,"date":1505345101,"out":0,"user_id":219981829,"read_state":0,"title":"","body":"Категории расходов"},"group_id":150773608,"secret":"privettebeotdyadykuziunegohrennapuze"}|
+14.09.2017|02:25:01| Отправлена информация о категориях расходов{"response":392}|
