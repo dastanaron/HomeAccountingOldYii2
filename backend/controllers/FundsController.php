@@ -117,7 +117,7 @@ class FundsController extends Controller
 
         if ($model->load(Yii::$app->request->post())) {
 
-            $model->date = Funds::DateToTimestamp($model->date);
+            $model->date = Funds::DateToTimestamp(Yii::$app->request->post()['Funds']['date']);
 
             $create_date = new \DateTime();
 
