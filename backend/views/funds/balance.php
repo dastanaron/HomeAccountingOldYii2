@@ -21,7 +21,7 @@ CalculateAsset::register($this);
                 <div class="summ-result">
                     <?php
                     if (is_object($model)) {
-                        echo $model->total_summ;
+                        echo $model->total_sum;
                     }
                     else {
                         echo $model;
@@ -32,7 +32,7 @@ CalculateAsset::register($this);
         </div>
         <div class="col-sm-9">
             <?php $form = ActiveForm::begin(); ?>
-            <?= $form->field($model, 'total_summ')->textInput(['maxlength' => true]) ?>
+            <?= $form->field($model, 'total_sum')->textInput(['maxlength' => true]) ?>
             <?= $form->field($model, 'user_id')->hiddenInput(['value'=> Yii::$app->user->getId()])->label(false) ?>
             <?= Html::submitButton('Сохранить', ['class' => 'btn btn-success']) ?>
             <?php ActiveForm::end(); ?>

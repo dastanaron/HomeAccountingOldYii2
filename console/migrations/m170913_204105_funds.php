@@ -19,7 +19,7 @@ class m170913_204105_funds extends Migration
             'user_id' => $this->integer()->defaultValue(0),
             'arrival_or_expense' => $this->integer(1)->notNull(),
             'category' => $this->integer(4)->null(),
-            'summ' => $this->string(10)->notNull(),
+            'sum' => $this->string(10)->notNull(),
             'cause' => $this->string(200)->null(),
             'date' => $this->string(50)->null(),
             'cr_time' => $this->dateTime()->notNull(),

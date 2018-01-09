@@ -5,14 +5,14 @@ namespace backend\models;
 use Yii;
 
 /**
- * This is the model class for table "current_balance".
+ * This is the model class for table "balance".
  *
- * @property integer $id
- * @property integer $user_id
- * @property integer $summ_income
- * @property integer $summ_consumption
- * @property integer $total_summ
+ * @property int $id
+ * @property int $user_id
+ * @property int $total_sum
  * @property string $up_time
+ *
+ * @property Bills[] $bills
  */
 class Balance extends \yii\db\ActiveRecord
 {
@@ -30,7 +30,7 @@ class Balance extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['summ_income', 'summ_consumption', 'total_summ', 'user_id'], 'integer'],
+            [['user_id', 'total_sum'], 'integer'],
             [['up_time'], 'safe'],
         ];
     }
@@ -42,10 +42,17 @@ class Balance extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'summ_income' => 'Сумма дохода',
-            'summ_consumption' => 'Сумма расхода',
-            'total_summ' => 'Сумма в наличии',
-            'up_time' => 'Последнее обновление',
+            'user_id' => 'Пользователь',
+            'total_sum' => 'Общая сумма',
+            'up_time' => 'Последнее изменение',
         ];
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getBills()
+    {
+        return $this->hasMany(Bills::className(), ['balance_id' => 'id']);
     }
 }

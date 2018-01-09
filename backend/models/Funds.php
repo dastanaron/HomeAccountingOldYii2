@@ -32,11 +32,11 @@ class Funds extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['arrival_or_expense', 'summ', 'cr_time', 'user_id'], 'required'],
+            [['arrival_or_expense', 'sum', 'cr_time', 'user_id'], 'required'],
             [['arrival_or_expense', 'category', 'user_id'], 'integer'],
             [['cr_time', 'up_time'], 'safe'],
             [['cause'], 'string', 'max' => 200],
-            [['summ'], 'integer'],
+            [['sum'], 'integer'],
             //[['date'], 'integer', 'max' => 50],
         ];
     }
@@ -50,7 +50,7 @@ class Funds extends \yii\db\ActiveRecord
             'id' => 'ID',
             'arrival_or_expense' => 'Приход или расход',
             'category' => 'Категория',
-            'summ' => 'Сумма',
+            'sum' => 'Сумма',
             'cause' => 'Причина',
             'date' => 'Дата',
             'cr_time' => 'Дата создания записи',

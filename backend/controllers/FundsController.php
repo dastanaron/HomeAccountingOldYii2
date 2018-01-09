@@ -6,7 +6,7 @@ use Yii;
 use backend\models\Funds;
 use backend\models\FundsSearch;
 use backend\models\FundsFilter;
-use backend\models\CurrentBalance;
+use backend\models\Balance;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -32,7 +32,7 @@ class FundsController extends Controller
                         'allow' => true,
                     ],
                     [
-                        'actions' => ['logout', 'index', 'view', 'create', 'update', 'delete', 'calculates', 'currentbalance'],
+                        'actions' => ['logout', 'index', 'view', 'create', 'update', 'delete', 'calculates', 'balance'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -59,7 +59,7 @@ class FundsController extends Controller
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
-            'balance' => $this->getCurrentBalanceModel(),
+            'balance' => $this->getBalanceModel(),
         ]);
     }
 
@@ -71,24 +71,24 @@ class FundsController extends Controller
         return $this->render('calculates', [
             'FilterModel' =>  $FilterModel,
             'dataProvider' => $dataProvider,
-            'balance' => $this->getCurrentBalanceModel(),
+            'balance' => $this->getBalanceModel(),
             'params' => Yii::$app->request->post(),
         ]);
     }
 
-    public function actionCurrentbalance() {
+    public function actionBalance() {
 
-        $model = $this->getCurrentBalanceModel();
+        $model = $this->getBalanceModel();
 
         if (!is_object($model)){
-            $model = new CurrentBalance();
+            $model = new Balance();
         }
 
         if ($model->load(Yii::$app->request->post())) {
             $model->save();
         }
 
-        return $this->render('currentbalance', [
+        return $this->render('balance', [
             'model' => $model,
         ]);
 
@@ -124,7 +124,7 @@ class FundsController extends Controller
             $model->cr_time = $create_date->format('Y-m-d H:i:s');
 
             //Считаем общую сумму в зависимости от записи
-            if($this->CalculateCurrentBalance($model->arrival_or_expense, $model->summ)) {
+            if($this->CalculateBalance($model->arrival_or_expense, $model->sum)) {
                 $model->save();
                 return $this->redirect(['view', 'id' => $model->id]);
             }
@@ -152,7 +152,7 @@ class FundsController extends Controller
         $model = $this->findModel($id);
 
         //Берем сумму до изменения из формы
-        $current_summ = $model->summ;
+        $current_sum = $model->sum;
 
         if ($model->load(Yii::$app->request->post())) {
 
@@ -162,9 +162,9 @@ class FundsController extends Controller
             $record_to_balance = true;
 
             //Сравниваем сумму до записи в модель и после
-            if ($model->summ !== $current_summ) {
+            if ($model->sum !== $current_sum) {
                 //Если изменилась - записываем и возвращаем значение флагу, если ошибка,  будет false и сообщит об ошибке.
-                $record_to_balance = $this->CalculateCurrentBalance($model->arrival_or_expense, $model->summ);
+                $record_to_balance = $this->CalculateBalance($model->arrival_or_expense, $model->sum);
             }
 
             //Считаем общую сумму в зависимости от записи
@@ -219,9 +219,9 @@ class FundsController extends Controller
     /**
      * @return static object
      */
-    protected function getCurrentBalanceModel() {
+    protected function getBalanceModel() {
 
-        $balance = CurrentBalance::findOne(['user_id' =>  Yii::$app->user->getId()]);
+        $balance = Balance::findOne(['user_id' =>  Yii::$app->user->getId()]);
 
         if(!empty($balance)) {
 
@@ -234,26 +234,26 @@ class FundsController extends Controller
 
     }
 
-    protected function CalculateCurrentBalance($dynamic,$summ) {
+    protected function CalculateBalance($dynamic,$sum) {
 
-        $balance = $this->getCurrentBalanceModel();
+        $balance = $this->getBalanceModel();
 
-        $total_summ = $balance->total_summ;
+        $total_sum = $balance->total_sum;
 
-        if(empty($total_summ)) {
-            $total_summ = 0;
+        if(empty($total_sum)) {
+            $total_sum = 0;
         }
 
         if ($dynamic == '1') {
 
-            $balance->total_summ = $total_summ + $summ;
+            $balance->total_sum = $total_sum + $sum;
 
             $balance->save();
 
         }
         elseif ($dynamic == '2') {
 
-            $balance->total_summ = $total_summ - $summ;
+            $balance->total_sum = $total_sum - $sum;
 
             $balance->save();
 

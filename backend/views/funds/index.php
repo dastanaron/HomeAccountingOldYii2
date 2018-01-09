@@ -22,7 +22,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <p>
         <?= Html::a('Создать запись', ['create'], ['class' => 'btn btn-success']) ?>
         <?= Html::a('Рассчеты', ['calculates'], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Текущий баланс', ['currentbalance'], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('Текущий баланс', ['balance'], ['class' => 'btn btn-primary']) ?>
     </p>
 
     <?php
@@ -52,7 +52,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 },
                 'filter' => Funds::СategoriesList(),
             ],
-            'summ',
+            'sum',
             'cause',
             [
                 'attribute'=>'date',

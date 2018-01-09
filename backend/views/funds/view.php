@@ -38,7 +38,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'label' => 'Категория',
                 'value' => $model->СategoriesList()[$model->category],
             ],
-            'summ',
+            'sum',
             'cause',
             [
                 'label' => 'Дата',

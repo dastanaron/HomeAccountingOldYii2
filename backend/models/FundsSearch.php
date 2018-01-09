@@ -19,7 +19,7 @@ class FundsSearch extends Funds
     {
         return [
             [['id', 'arrival_or_expense', 'category'], 'integer'],
-            [['summ', 'cause', 'date', 'cr_time', 'up_time'], 'safe'],
+            [['sum', 'cause', 'date', 'cr_time', 'up_time'], 'safe'],
         ];
     }
 
@@ -67,7 +67,7 @@ class FundsSearch extends Funds
             'user_id' =>  Yii::$app->user->getId(),
             'arrival_or_expense' => $this->arrival_or_expense,
             'category' => $this->category,
-            'summ' => $this->summ,
+            'sum' => $this->sum,
             'date' => $this->date,
             'cr_time' => $this->cr_time,
             'up_time' => $this->up_time,

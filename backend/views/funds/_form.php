@@ -24,7 +24,7 @@ if(!empty($model->date)) {
 
     <?= $form->field($model, 'category')->listBox(Funds::СategoriesList(),['size' => 1]) ?>
 
-    <?= $form->field($model, 'summ')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'sum')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'cause')->textInput(['maxlength' => true]) ?>
 
@@ -32,15 +32,6 @@ if(!empty($model->date)) {
         'mask' => '99.99.9999',
     ])->textInput(['value' => $date_default]) ?>
     <?= $form->field($model, 'user_id')->hiddenInput(['value'=> Yii::$app->user->getId()])->label(false) ?>
-
-    <?php
-    /*
-    $form->field($model, 'cr_time')->textInput()
-
-    $form->field($model, 'up_time')->textInput()
-
-    */
-    ?>
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Создать' : 'Изменить', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
