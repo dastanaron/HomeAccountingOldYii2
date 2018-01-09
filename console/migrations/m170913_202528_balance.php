@@ -2,7 +2,7 @@
 
 use yii\db\Migration;
 
-class m170913_202528_current_balance extends Migration
+class m170913_202528_balance extends Migration
 {
 
     public $tableName = 'balance';

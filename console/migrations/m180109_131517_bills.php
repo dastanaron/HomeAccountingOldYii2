@@ -27,7 +27,7 @@ class m180109_131517_bills extends Migration
             'updated_at' => $this->dateTime()->null(),
         ], $tableOptions);
 
-        $this->addForeignKey('fk_bills_1', $this->tableName, 'balance_id', 'current_balance', 'id');
+        $this->addForeignKey('fk_bills_1', $this->tableName, 'balance_id', 'balance', 'id');
 
         $this->AlterTable();
 
