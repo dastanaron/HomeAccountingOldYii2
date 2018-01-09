@@ -22,7 +22,8 @@ class m180109_131517_bills extends Migration
             'name' => $this->string()->notNull(),
             'sum' => $this->integer()->notNull()->defaultValue(0),
             'deadline' => $this->dateTime()->null(),
-            'created_at' => $this->dateTime()->defaultValue(new DateTime()),
+            'comment' => $this->text()->null(),
+            'created_at' => $this->dateTime()->null(),
             'updated_at' => $this->dateTime()->null(),
         ], $tableOptions);
 
@@ -39,7 +40,7 @@ class m180109_131517_bills extends Migration
 
     public function AlterTable()
     {
-        $sql = "ALTER TABLE `$this->tableName` CHANGE `updated_at` `updated_at` DATETIME on update CURRENT_TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP;";
+        $sql = "ALTER TABLE `$this->tableName` CHANGE `updated_at` `updated_at` DATETIME on update CURRENT_TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP;";
         $this->execute($sql);
     }
 }
