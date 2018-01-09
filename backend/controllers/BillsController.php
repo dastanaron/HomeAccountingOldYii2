@@ -97,15 +97,12 @@ class BillsController extends Controller
      * @param $id
      * @return string|\yii\web\Response
      * @throws NotFoundHttpException
-     * @throws \yii\base\InvalidConfigException
      */
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post())) {
-
-            $model->updated_at = Yii::$app->formatter->asDatetime(time(), 'php: Y-m-d H:i:s');
             $model->save();
             return $this->redirect(['view', 'id' => $model->id]);
         }
@@ -116,11 +113,12 @@ class BillsController extends Controller
     }
 
     /**
-     * Deletes an existing Bills model.
-     * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param integer $id
-     * @return mixed
-     * @throws NotFoundHttpException if the model cannot be found
+     * @param $id
+     * @return \yii\web\Response
+     * @throws NotFoundHttpException
+     * @throws \Exception
+     * @throws \Throwable
+     * @throws \yii\db\StaleObjectException
      */
     public function actionDelete($id)
     {
