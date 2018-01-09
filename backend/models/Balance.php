@@ -14,14 +14,14 @@ use Yii;
  * @property integer $total_summ
  * @property string $up_time
  */
-class CurrentBalance extends \yii\db\ActiveRecord
+class Balance extends \yii\db\ActiveRecord
 {
     /**
      * @inheritdoc
      */
     public static function tableName()
     {
-        return 'current_balance';
+        return 'balance';
     }
 
     /**
