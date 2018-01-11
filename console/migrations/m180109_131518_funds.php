@@ -59,11 +59,4 @@ class m180109_131518_funds extends Migration
         $this->execute($sql);
     }
 
-
-    /*public function createTable($table, $columns, $options = null)
-    {
-       $this->dropTable($this->tableName);
-       parent::createTable($table, $columns, $options = null);
-    }*/
-
 }

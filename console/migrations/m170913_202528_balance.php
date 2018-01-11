@@ -1,6 +1,7 @@
 <?php
 
 use yii\db\Migration;
+use dastanaron\yiimigrate\updater\TableData;
 
 class m170913_202528_balance extends Migration
 {
@@ -23,10 +24,22 @@ class m170913_202528_balance extends Migration
 
         $this->AlterTable();
 
+        $tableData = new TableData($this->tableName);
+
+        $sqldump = $tableData->Dump('read');
+
+        if(!empty($sqldump)) {
+            $this->execute($sqldump);
+        }
+
     }
 
     public function down()
     {
+        $tableData = new TableData($this->tableName);
+
+        $tableData->Dump('create');
+
         $this->dropTable($this->tableName);
     }
 

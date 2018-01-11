@@ -1,6 +1,7 @@
 <?php
 
 use yii\db\Migration;
+use dastanaron\yiimigrate\updater\TableData;
 
 /**
  * Class m180109_131517_bills
@@ -31,10 +32,22 @@ class m180109_131517_bills extends Migration
 
         $this->AlterTable();
 
+        $tableData = new TableData($this->tableName);
+
+        $sqldump = $tableData->Dump('read');
+
+        if(!empty($sqldump)) {
+            $this->execute($sqldump);
+        }
+
     }
 
     public function down()
     {
+        $tableData = new TableData($this->tableName);
+
+        $tableData->Dump('create');
+
         $this->dropTable($this->tableName);
     }
 

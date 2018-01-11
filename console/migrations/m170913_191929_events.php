@@ -1,21 +1,16 @@
 <?php
 
 use yii\db\Migration;
+use dastanaron\yiimigrate\updater\TableData;
 
 class m170913_191929_events extends Migration
 {
-    /*public function safeUp()
-    {
 
-    }
+    public $tableName = 'events';
 
-    public function safeDown()
-    {
-        echo "m170913_191929_events cannot be reverted.\n";
-
-        return false;
-    }*/
-
+    /**
+     * @return bool|void
+     */
     public function up()
     {
         $tableOptions = null;
@@ -24,7 +19,7 @@ class m170913_191929_events extends Migration
             $tableOptions = 'CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE=InnoDB';
         }
 
-        $this->createTable('events', [
+        $this->createTable($this->tableName, [
             'id' => $this->primaryKey(),
             'user_id' => $this->integer()->defaultValue(0),
             'head_event' => $this->string(55)->null(),
@@ -33,10 +28,25 @@ class m170913_191929_events extends Migration
             'date_notification' => $this->timestamp(),
             'timestamp' => $this->timestamp()->defaultValue(null),
         ], $tableOptions);
+
+        $tableData = new TableData($this->tableName);
+
+        $sqldump = $tableData->Dump('read');
+
+        if(!empty($sqldump)) {
+            $this->execute($sqldump);
+        }
     }
 
+    /**
+     * @return bool|void
+     */
     public function down()
     {
-        $this->dropTable('events');
+        $tableData = new TableData($this->tableName);
+
+        $tableData->Dump('create');
+
+        $this->dropTable($this->tableName);
     }
 }
