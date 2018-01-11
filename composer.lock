@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "eb43507213da2b7b8812abcaa78bc6fc",
+    "content-hash": "0f9a88b7c03c1f57fc460f698ae2a101",
     "packages": [
         {
             "name": "bower-asset/bootstrap",
@@ -325,6 +325,49 @@
                 "markdown-extra"
             ],
             "time": "2017-07-16T21:13:23+00:00"
+        },
+        {
+            "name": "dastanaron/yii2-migrate-updater",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/dastanaron/yii2-migrate-updater.git",
+                "reference": "5e4487f128e831880f13a89f34cacdacc70e1f26"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/dastanaron/yii2-migrate-updater/zipball/5e4487f128e831880f13a89f34cacdacc70e1f26",
+                "reference": "5e4487f128e831880f13a89f34cacdacc70e1f26",
+                "shasum": ""
+            },
+            "require": {
+                "yiisoft/yii2": "~2.0.0"
+            },
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-4": {
+                    "dastanaron\\yiimigrate\\updater\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "dastanaron",
+                    "email": "flow199@yandex.ru"
+                }
+            ],
+            "description": "The extension allows you to save data when performing a ./yii migrate/redo",
+            "keywords": [
+                " migrate",
+                " migrations",
+                " update",
+                "extension",
+                "yii2"
+            ],
+            "time": "2018-01-11T09:56:25+00:00"
         },
         {
             "name": "ezyang/htmlpurifier",
@@ -3481,7 +3524,8 @@
         "kartik-v/yii2-grid": 20,
         "kartik-v/yii2-widget-select2": 20,
         "kartik-v/yii2-widget-datepicker": 20,
-        "kartik-v/yii2-widget-datetimepicker": 20
+        "kartik-v/yii2-widget-datetimepicker": 20,
+        "dastanaron/yii2-migrate-updater": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

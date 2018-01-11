@@ -21,7 +21,8 @@
         "kartik-v/yii2-grid": "@dev",
         "kartik-v/yii2-widget-select2": "@dev",
         "kartik-v/yii2-widget-datepicker": "@dev",
-        "kartik-v/yii2-widget-datetimepicker": "@dev"
+        "kartik-v/yii2-widget-datetimepicker": "@dev",
+        "dastanaron/yii2-migrate-updater": "@dev"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.0.0",
