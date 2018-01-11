@@ -15,7 +15,7 @@ use Yii;
  * @property string $created_at
  * @property string $updated_at
  *
- * @property CurrentBalance $balance
+ * @property Balance $balance
  */
 class Bills extends \yii\db\ActiveRecord
 {
@@ -38,7 +38,7 @@ class Bills extends \yii\db\ActiveRecord
             [['deadline', 'created_at', 'updated_at'], 'safe'],
             [['name'], 'string', 'max' => 255],
             [['comment'], 'string'],
-            [['balance_id'], 'exist', 'skipOnError' => true, 'targetClass' => CurrentBalance::className(), 'targetAttribute' => ['balance_id' => 'id']],
+            [['balance_id'], 'exist', 'skipOnError' => true, 'targetClass' => Balance::className(), 'targetAttribute' => ['balance_id' => 'id']],
         ];
     }
 
@@ -64,6 +64,6 @@ class Bills extends \yii\db\ActiveRecord
      */
     public function getBalance()
     {
-        return $this->hasOne(CurrentBalance::className(), ['id' => 'balance_id']);
+        return $this->hasOne(Balance::className(), ['id' => 'balance_id']);
     }
 }

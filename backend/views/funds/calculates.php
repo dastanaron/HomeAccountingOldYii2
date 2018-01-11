@@ -28,7 +28,7 @@ CalculateAsset::register($this);
                     <div class="summ-result">
                         <?php
                         if (is_object($balance)) {
-                            echo $balance->total_summ;
+                            echo $balance->total_sum;
                         }
                         else {
                             echo $balance;
@@ -80,7 +80,7 @@ CalculateAsset::register($this);
         <div class="calculates-result">
             <?php
 
-            $total_summ = 0;
+            $total_sum = 0;
 
             if(empty($dataProvider)) {
                 echo '<div class="error">Не найдено соответствий по фильтру</div>';
@@ -95,12 +95,12 @@ CalculateAsset::register($this);
                         <td>' . Funds::TimestampToDate($item->date) . '</td>
                         <td>' . Funds::ArrivalOrExpens()[$item->arrival_or_expense] . '</td>
                         <td>' . Funds::СategoriesList()[$item->category] . '</td>
-                        <td>' . $item->summ . '</td>
+                        <td>' . $item->sum . '</td>
                         <td>' . $item->cause . '</td>
                     </tr>';
-                    $total_summ += $item->summ;
+                    $total_sum += $item->sum;
                 }?>
-                <tr><td></td><td></td><td class="bold">Итого:</td><td><?=$total_summ;?></td><td></td></tr>
+                <tr><td></td><td></td><td class="bold">Итого:</td><td><?=$total_sum;?></td><td></td></tr>
             </table>
             <?php }?>
         </div>
