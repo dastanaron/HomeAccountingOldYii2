@@ -35,9 +35,10 @@ AppAsset::register($this);
             'class' => 'navbar-inverse navbar-fixed-top',
         ],
     ]);
-    $menuItems = [
-        ['label' => 'Приход/расход', 'url' => ['/funds']],
-    ];
+
+    $menuItems[] = ['label' => 'Приход/расход', 'url' => ['/funds']];
+    $menuItems[] = ['label' => 'Счета', 'url' => ['/bills']];
+
     if (Yii::$app->user->isGuest) {
         $menuItems[] = ['label' => 'Войти', 'url' => ['/site/login']];
     } else {
@@ -67,7 +68,7 @@ AppAsset::register($this);
 </div>
 
 <footer class="footer">
-    <div class="container">
+    <div class="container-fluid">
         <p class="pull-left">Дата/Время: <?= date('d.m.Y H:i:s') ?></p>
 
         <p class="pull-right"><?= Yii::powered() ?></p>

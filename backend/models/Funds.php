@@ -3,12 +3,15 @@
 namespace backend\models;
 
 use Yii;
+use backend\models\Balance;
 
 /**
  * This is the model class for table "funds".
  *
  * @property integer $id
  * @property integer $user_id
+ * @property integer $sum
+ * @property integer $bill_id
  * @property integer $arrival_or_expense
  * @property integer $category
  * @property string $cause
@@ -37,7 +40,7 @@ class Funds extends \yii\db\ActiveRecord
             [['cr_time', 'up_time'], 'safe'],
             [['cause'], 'string', 'max' => 200],
             [['sum'], 'integer'],
-            //[['date'], 'integer', 'max' => 50],
+            [['bill_id'], 'integer', 'max' => 11],
         ];
     }
 
@@ -49,6 +52,7 @@ class Funds extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'arrival_or_expense' => 'Приход или расход',
+            'bill_id' => 'Связка со счетом',
             'category' => 'Категория',
             'sum' => 'Сумма',
             'cause' => 'Причина',
@@ -61,11 +65,11 @@ class Funds extends \yii\db\ActiveRecord
     /**
      * @return array
      */
-    public static function СategoriesList()
+    public static function CategoriesList()
     {
 
         return [
-            0 => '',
+            //0 => '',
             1 => 'Продукты питания',
             2 => 'Питание в столовых и кафе',
             3 => 'Покупки для дома',
@@ -76,6 +80,9 @@ class Funds extends \yii\db\ActiveRecord
             9 => 'Транспорт',
             10 => 'Одежда и обувь',
             11 => 'Услуги быта и связи',
+            12 => 'Зарплата',
+            13 => 'Аванс',
+            14 => 'Подработка',
         ];
 
     }

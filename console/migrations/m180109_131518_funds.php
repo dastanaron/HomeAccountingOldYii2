@@ -1,8 +1,12 @@
 <?php
 
 use yii\db\Migration;
+use dastanaron\yiimigrate\updater\TableData;
 
-class m170913_204105_funds extends Migration
+/**
+ * Class m180109_131518_funds
+ */
+class m180109_131518_funds extends Migration
 {
     public $tableName = 'funds';
 
@@ -10,13 +14,13 @@ class m170913_204105_funds extends Migration
     {
         $tableOptions = null;
         if ($this->db->driverName === 'mysql') {
-            // http://stackoverflow.com/questions/766809/whats-the-difference-between-utf8-general-ci-and-utf8-unicode-ci
             $tableOptions = 'CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE=InnoDB';
         }
 
         $this->createTable($this->tableName, [
             'id' => $this->primaryKey(),
             'user_id' => $this->integer()->defaultValue(0),
+            'bill_id' => $this->integer()->null(),
             'arrival_or_expense' => $this->integer(1)->notNull(),
             'category' => $this->integer(4)->null(),
             'sum' => $this->string(10)->notNull(),
@@ -28,10 +32,24 @@ class m170913_204105_funds extends Migration
 
         $this->AlterTable();
 
+        $tableData = new TableData($this->tableName);
+
+        $sqldump = $tableData->Dump('read');
+
+        if(!empty($sqldump)) {
+            $this->execute($sqldump);
+        }
+
+        $this->addForeignKey('fk_bills_2', $this->tableName, 'bill_id', 'bills', 'id');
+
     }
 
     public function down()
     {
+        $tableData = new TableData($this->tableName);
+
+        $tableData->Dump('create');
+
         $this->dropTable($this->tableName);
     }
 
@@ -40,4 +58,5 @@ class m170913_204105_funds extends Migration
         $sql = "ALTER TABLE `$this->tableName` CHANGE `up_time` `up_time` DATETIME on update CURRENT_TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP;";
         $this->execute($sql);
     }
+
 }

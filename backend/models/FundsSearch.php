@@ -18,8 +18,8 @@ class FundsSearch extends Funds
     public function rules()
     {
         return [
-            [['id', 'arrival_or_expense', 'category'], 'integer'],
-            [['sum', 'cause', 'date', 'cr_time', 'up_time'], 'safe'],
+            [['id', 'bill_id', 'arrival_or_expense', 'category', 'sum'], 'integer'],
+            [['cause', 'date', 'cr_time', 'up_time'], 'safe'],
         ];
     }
 
@@ -67,11 +67,12 @@ class FundsSearch extends Funds
             'user_id' =>  Yii::$app->user->getId(),
             'arrival_or_expense' => $this->arrival_or_expense,
             'category' => $this->category,
-            'sum' => $this->sum,
             'date' => $this->date,
             'cr_time' => $this->cr_time,
             'up_time' => $this->up_time,
         ]);
+
+        $query->andFilterWhere(['>=', 'sum', $this->sum]);
 
         $query->andFilterWhere(['like', 'cause', $this->cause]);
 
