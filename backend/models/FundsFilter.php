@@ -35,11 +35,8 @@ class FundsFilter extends Funds
     }
 
     /**
-     * Creates data provider instance with search query applied
-     *
-     * @param array $params
-     *
-     * @return ActiveDataProvider
+     * @param $params
+     * @return array|\yii\db\ActiveRecord[]
      */
     public function search($params)
     {
@@ -59,7 +56,7 @@ class FundsFilter extends Funds
             'user_id' =>  Yii::$app->user->getId(),
             'arrival_or_expense' => $this->arrival_or_expense,
             'category' => $this->category,
-            'summ' => $this->summ,
+            'summ' => $this->sum,
             'date' => $this->date,
         ]);
 

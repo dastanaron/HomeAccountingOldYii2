@@ -1,9 +1,8 @@
 <?php
 
 use yii\helpers\Html;
-use yii\grid\GridView;
+use kartik\grid\GridView;
 use backend\models\Funds;
-use yii\helpers\VarDumper;
 use yii\widgets\MaskedInput;
 
 /* @var $this yii\web\View */
@@ -17,7 +16,6 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="funds-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
         <?= Html::a('Создать запись', ['create'], ['class' => 'btn btn-success']) ?>
@@ -25,15 +23,11 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= Html::a('Текущий баланс', ['balance'], ['class' => 'btn btn-primary']) ?>
     </p>
 
-    <?php
-        //VarDumper::dump($searchModel, 10, true);
-    ?>
-
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
+            ['class' => 'kartik\grid\SerialColumn'],
 
             //'id',
             [
@@ -68,8 +62,23 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'cr_time',
             // 'up_time',
 
-            ['class' => 'yii\grid\ActionColumn'],
+            ['class' => 'kartik\grid\ActionColumn'],
         ],
+        'toolbar' =>  [
+            ['content'=>
+                Html::a('<i class="glyphicon glyphicon-plus"></i>', ['create'], ['data-pjax'=>0, 'class' => 'btn btn-default', 'title'=> 'новая запись'])
+            ],
+            '{export}',
+        ],
+        'responsive' => true,
+        'floatHeader' => true,
+        'panel' => [
+            'type' => GridView::TYPE_DEFAULT,
+            'heading'=>'<h3 class="panel-title"><i class="glyphicon glyphicon-globe"></i> Расходы/доходы</h3>',
+            'after'=>Html::a('<i class="glyphicon glyphicon-repeat"></i> Сбросить фильтр', ['index'], ['class' => 'btn btn-info']),
+            'footer'=>false
+        ],
+        'exportContainer' => ['class' => 'btn-group-md'],
     ]); ?>
     <div class="container">
         <div class="information">
