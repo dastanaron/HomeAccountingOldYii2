@@ -49,7 +49,7 @@ CalculateAsset::register($this);
                     <div class="element col-sm-3">
                         <div class="control-label">Категория</div>
                         <div class="control-element">
-                            <?=Html::listBox('category', empty($params['category']) ? null : $params['category'], Funds::СategoriesList(),['size' => 1, 'class' => 'form-control']);?>
+                            <?=Html::listBox('category', empty($params['category']) ? null : $params['category'], Funds::CategoriesList(),['size' => 1, 'class' => 'form-control']);?>
                         </div>
                     </div>
                     <div class="element col-sm-3">
@@ -94,7 +94,7 @@ CalculateAsset::register($this);
                     echo '<tr>
                         <td>' . Funds::TimestampToDate($item->date) . '</td>
                         <td>' . Funds::ArrivalOrExpens()[$item->arrival_or_expense] . '</td>
-                        <td>' . Funds::СategoriesList()[$item->category] . '</td>
+                        <td>' . Funds::CategoriesList()[$item->category] . '</td>
                         <td>' . $item->sum . '</td>
                         <td>' . $item->cause . '</td>
                     </tr>';

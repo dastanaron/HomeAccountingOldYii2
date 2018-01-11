@@ -3,6 +3,7 @@
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 use backend\models\Funds;
+use backend\components\Bills\SelectBills;
 
 /* @var $this yii\web\View */
 /* @var $model backend\models\Funds */
@@ -33,6 +34,10 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'label' => 'Приход или расход',
                 'value' => $model->ArrivalOrExpens()[$model->arrival_or_expense],
+            ],
+            [
+                'attribute'=>'bill_id',
+                'value'=> SelectBills::getBillsByUserArray()[$model->bill_id],
             ],
             [
                 'label' => 'Категория',

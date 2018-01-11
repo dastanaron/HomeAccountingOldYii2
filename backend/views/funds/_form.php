@@ -24,7 +24,7 @@ if(!empty($model->date)) {
 
     <?= $form->field($model, 'arrival_or_expense')->widget(Select2::className(), [
         'data' => Funds::ArrivalOrExpens(),
-        'options' => ['placeholder' => 'Выберите'],
+        'options' => ['placeholder' => 'Выберите', 'disabled' => !$model->isNewRecord],
         'pluginOptions' => [
             'allowClear' => true
         ],

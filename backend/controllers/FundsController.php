@@ -15,7 +15,7 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use backend\models\Bills;
-
+use backend\components\Calculators\FundsCalculator;
 /**
  * FundsController implements the CRUD actions for Funds model.
  */
@@ -95,7 +95,7 @@ class FundsController extends Controller
         }
 
         if ($model->load(Yii::$app->request->post())) {
-            $model->save();
+            FundsCalculator::CalculateBalance();
         }
 
         return $this->render('balance', [
@@ -117,9 +117,9 @@ class FundsController extends Controller
     }
 
     /**
-     * Creates a new Funds model.
-     * If creation is successful, the browser will be redirected to the 'view' page.
-     * @return mixed
+     * @return string|\yii\web\Response
+     * @throws NotFoundHttpException
+     * @throws \Exception
      */
     public function actionCreate()
     {
@@ -133,17 +133,13 @@ class FundsController extends Controller
 
             $model->cr_time = $create_date->format('Y-m-d H:i:s');
 
-            //Считаем общую сумму в зависимости от записи
-            if($this->CalculateBalance($model->arrival_or_expense, $model->sum)) {
-                $model->save();
-                return $this->redirect(['view', 'id' => $model->id]);
-            }
-            else {
-                return $this->render('create', [
-                    'model' => $model,
-                    'error' => 'Ошибка изменения общей суммы',
-                ]);
-            }
+            $bill = $this->findBill($model->bill_id);
+
+            FundsCalculator::calculateBill($bill, $model->sum, $model->arrival_or_expense);
+
+            $model->save();
+            return $this->redirect(['view', 'id' => $model->id]);
+
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -155,40 +151,27 @@ class FundsController extends Controller
      * @param $id
      * @return string|\yii\web\Response
      * @throws NotFoundHttpException
+     * @throws \Exception
      */
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
 
         //Берем сумму до изменения из формы
-        $current_sum = $model->sum;
+        $beforeSum = $model->sum;
 
         if ($model->load(Yii::$app->request->post())) {
 
             $model->date = Funds::DateToTimestamp(Yii::$app->request->post()['Funds']['date']);
 
-            //Делаем флаг записи в базу баланса
-            $record_to_balance = true;
 
-            //Сравниваем сумму до записи в модель и после
-            if ($model->sum !== $current_sum) {
-                //Если изменилась - записываем и возвращаем значение флагу, если ошибка,  будет false и сообщит об ошибке.
-                $record_to_balance = $this->CalculateBalance($model->arrival_or_expense, $model->sum);
-            }
+            $bill = $this->findBill($model->bill_id);
+            FundsCalculator::calculateBill($bill, $model->sum, $model->arrival_or_expense, true, $beforeSum);
 
-            //Считаем общую сумму в зависимости от записи
-            if($record_to_balance) {
+            $model->save();
 
-                $model->save();
-                return $this->redirect(['view', 'id' => $model->id, 'date' => $model->date]);
+            return $this->redirect(['view', 'id' => $model->id]);
 
-            }
-            else {
-                return $this->render('update', [
-                    'model' => $model,
-                    'error' => 'Ошибка изменения общей суммы',
-                ]);
-            }
         } else {
             return $this->render('update', [
                 'model' => $model,
@@ -206,8 +189,15 @@ class FundsController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        $model = $this->findModel($id);
 
+        $beforeSum = $model->sum;
+
+        $bill = $this->findBill($model->bill_id);
+
+        FundsCalculator::calculateBill($bill, 0, $model->arrival_or_expense, true, $beforeSum);
+
+        $model->delete();
         return $this->redirect(['index']);
     }
 
@@ -221,6 +211,20 @@ class FundsController extends Controller
     protected function findModel($id)
     {
         if (($model = Funds::findOne(['id'=>$id, 'user_id'=>Yii::$app->user->getId()])) !== null) {
+            return $model;
+        } else {
+            throw new NotFoundHttpException('The requested page does not exist.');
+        }
+    }
+
+    /**
+     * @param $id
+     * @return Bills
+     * @throws NotFoundHttpException
+     */
+    protected function findBill($id)
+    {
+        if (($model = Bills::findOne(['id'=>$id])) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
@@ -245,44 +249,7 @@ class FundsController extends Controller
 
     }
 
-    /**
-     * @param $dynamic
-     * @param $sum
-     * @return bool
-     */
-    protected function CalculateBalance($dynamic,$sum) {
 
-        $balance = $this->getBalanceModel();
-
-        $total_sum = $balance->total_sum;
-
-        if(empty($total_sum)) {
-            $total_sum = 0;
-        }
-
-        if ($dynamic == '1') {
-
-            $balance->total_sum = $total_sum + $sum;
-
-            $balance->save();
-
-        }
-        elseif ($dynamic == '2') {
-
-            $balance->total_sum = $total_sum - $sum;
-
-            $balance->save();
-
-        }
-        else {
-
-            return false;
-
-        }
-
-        return true;
-
-    }
 
 
 }

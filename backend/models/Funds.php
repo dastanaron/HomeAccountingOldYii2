@@ -10,6 +10,8 @@ use backend\models\Balance;
  *
  * @property integer $id
  * @property integer $user_id
+ * @property integer $sum
+ * @property integer $bill_id
  * @property integer $arrival_or_expense
  * @property integer $category
  * @property string $cause

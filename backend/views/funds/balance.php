@@ -32,9 +32,8 @@ CalculateAsset::register($this);
         </div>
         <div class="col-sm-9">
             <?php $form = ActiveForm::begin(); ?>
-            <?= $form->field($model, 'total_sum')->textInput(['maxlength' => true]) ?>
             <?= $form->field($model, 'user_id')->hiddenInput(['value'=> Yii::$app->user->getId()])->label(false) ?>
-            <?= Html::submitButton('Сохранить', ['class' => 'btn btn-success']) ?>
+            <?= Html::submitButton('Пересчитать', ['class' => 'btn btn-success']) ?>
             <?php ActiveForm::end(); ?>
         </div>
     </div>
