@@ -2,15 +2,19 @@
 
 namespace backend\controllers;
 
+
 use Yii;
 use backend\models\Funds;
 use backend\models\FundsSearch;
 use backend\models\FundsFilter;
 use backend\models\Balance;
+use yii\db\Exception;
+use yii\db\Query;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
+use backend\models\Bills;
 
 /**
  * FundsController implements the CRUD actions for Funds model.
@@ -63,6 +67,9 @@ class FundsController extends Controller
         ]);
     }
 
+    /**
+     * @return string
+     */
     public function actionCalculates()
     {
         $FilterModel = new FundsFilter();
@@ -76,6 +83,9 @@ class FundsController extends Controller
         ]);
     }
 
+    /**
+     * @return string
+     */
     public function actionBalance() {
 
         $model = $this->getBalanceModel();
@@ -95,9 +105,9 @@ class FundsController extends Controller
     }
 
     /**
-     * Displays a single Funds model.
-     * @param integer $id
-     * @return mixed
+     * @param $id
+     * @return string
+     * @throws NotFoundHttpException
      */
     public function actionView($id)
     {
@@ -142,10 +152,9 @@ class FundsController extends Controller
     }
 
     /**
-     * Updates an existing Funds model.
-     * If update is successful, the browser will be redirected to the 'view' page.
-     * @param integer $id
-     * @return mixed
+     * @param $id
+     * @return string|\yii\web\Response
+     * @throws NotFoundHttpException
      */
     public function actionUpdate($id)
     {
@@ -188,10 +197,12 @@ class FundsController extends Controller
     }
 
     /**
-     * Deletes an existing Funds model.
-     * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param integer $id
-     * @return mixed
+     * @param $id
+     * @return \yii\web\Response
+     * @throws NotFoundHttpException
+     * @throws \Exception
+     * @throws \Throwable
+     * @throws \yii\db\StaleObjectException
      */
     public function actionDelete($id)
     {
@@ -204,7 +215,7 @@ class FundsController extends Controller
      * Finds the Funds model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Funds the loaded model
+     * @return Funds
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
@@ -217,7 +228,7 @@ class FundsController extends Controller
     }
 
     /**
-     * @return static object
+     * @return null|string|static|Balance
      */
     protected function getBalanceModel() {
 
@@ -234,6 +245,11 @@ class FundsController extends Controller
 
     }
 
+    /**
+     * @param $dynamic
+     * @param $sum
+     * @return bool
+     */
     protected function CalculateBalance($dynamic,$sum) {
 
         $balance = $this->getBalanceModel();

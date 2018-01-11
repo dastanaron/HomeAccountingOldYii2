@@ -3,6 +3,8 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use backend\models\Funds;
+use kartik\select2\Select2;
+use backend\components\Bills\SelectBills;
 
 /* @var $this yii\web\View */
 /* @var $model backend\models\Funds */
@@ -20,9 +22,23 @@ if(!empty($model->date)) {
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'arrival_or_expense')->listBox(Funds::ArrivalOrExpens(),['size' => 1]) ?>
+    <?= $form->field($model, 'arrival_or_expense')->widget(Select2::className(), [
+        'data' => Funds::ArrivalOrExpens(),
+        'options' => ['placeholder' => 'Выберите'],
+        'pluginOptions' => [
+            'allowClear' => true
+        ],
+    ]); ?>
 
-    <?= $form->field($model, 'category')->listBox(Funds::СategoriesList(),['size' => 1]) ?>
+    <?= $form->field($model, 'bill_id')->widget(Select2::className(), [
+            'data' => SelectBills::getBillsByUserArray(),
+            'options' => ['placeholder' => 'Выберите счет'],
+            'pluginOptions' => [
+                'allowClear' => true
+            ],
+    ]);?>
+
+    <?= $form->field($model, 'category')->listBox(Funds::CategoriesList(),['size' => 1]) ?>
 
     <?= $form->field($model, 'sum')->textInput(['maxlength' => true]) ?>
 

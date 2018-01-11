@@ -2,7 +2,10 @@
 
 use yii\db\Migration;
 
-class m170913_204105_funds extends Migration
+/**
+ * Class m180109_131518_funds
+ */
+class m180109_131518_funds extends Migration
 {
     public $tableName = 'funds';
 
@@ -17,6 +20,7 @@ class m170913_204105_funds extends Migration
         $this->createTable($this->tableName, [
             'id' => $this->primaryKey(),
             'user_id' => $this->integer()->defaultValue(0),
+            'bill_id' => $this->integer()->null(),
             'arrival_or_expense' => $this->integer(1)->notNull(),
             'category' => $this->integer(4)->null(),
             'sum' => $this->string(10)->notNull(),
@@ -27,6 +31,8 @@ class m170913_204105_funds extends Migration
         ], $tableOptions);
 
         $this->AlterTable();
+
+        $this->addForeignKey('fk_bills_2', $this->tableName, 'bill_id', 'bills', 'id');
 
     }
 

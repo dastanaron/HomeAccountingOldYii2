@@ -3,6 +3,8 @@
 namespace backend\models;
 
 use Yii;
+use yii\db\ActiveRecord;
+use backend\models\Balance;
 
 /**
  * This is the model class for table "bills".
@@ -17,8 +19,31 @@ use Yii;
  *
  * @property Balance $balance
  */
-class Bills extends \yii\db\ActiveRecord
+class Bills extends ActiveRecord
 {
+
+    /**
+     * Funds constructor.
+     * @param array $config
+     */
+    public function __construct(array $config = [])
+    {
+        parent::__construct($config);
+
+        $this->balance_id = $this->getBalanceId();
+
+    }
+
+    /**
+     * @return mixed
+     */
+    private function getBalanceId()
+    {
+        $user = Yii::$app->user->identity->getId();
+        $balance = Balance::find(['id' => $user])->one();
+        return $balance->id;
+    }
+
     /**
      * @inheritdoc
      */

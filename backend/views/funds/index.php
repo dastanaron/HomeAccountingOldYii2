@@ -4,6 +4,7 @@ use yii\helpers\Html;
 use kartik\grid\GridView;
 use backend\models\Funds;
 use yii\widgets\MaskedInput;
+use backend\components\Bills\SelectBills;
 
 /* @var $this yii\web\View */
 /* @var $searchModel backend\models\FundsSearch */
@@ -37,17 +38,47 @@ $this->params['breadcrumbs'][] = $this->title;
                     return Funds::ArrivalOrExpens()[$data->arrival_or_expense];
                 },
                 'filter' => Funds::ArrivalOrExpens(),
+                'width' => '150px',
             ],
             [
                 'attribute'=>'category',
                 //'contentOptions' =>['class' => 'table_class','style'=>'display:block;'],
                 'content'=>function($data){
-                    return Funds::СategoriesList()[$data->category];
+                    return Funds::CategoriesList()[$data->category];
                 },
-                'filter' => Funds::СategoriesList(),
+                'filter' => Funds::CategoriesList(),
+                'filterType' => GridView::FILTER_SELECT2,
+                'filterWidgetOptions' => [
+                    'options' => ['placeholder' => 'Выбрать'],
+                    'pluginOptions' => [
+                        'allowClear' => true
+                    ]
+                ],
+                'width' => '400px',
             ],
-            'sum',
-            'cause',
+            [
+                'attribute'=>'bill_id',
+                'content'=>function($data){
+                    return SelectBills::getBillsByUserArray()[$data->bill_id];
+                },
+                'filter' => SelectBills::getBillsByUserArray(),
+                'filterType' => GridView::FILTER_SELECT2,
+                'filterWidgetOptions' => [
+                    'options' => ['placeholder' => 'Выбрать'],
+                    'pluginOptions' => [
+                        'allowClear' => true
+                    ]
+                ],
+            ],
+
+            [
+                'attribute' => 'sum',
+                'width' => '200px',
+            ],
+            [
+                'attribute' => 'cause',
+                'hidden' => true,
+            ],
             [
                 'attribute'=>'date',
                 //'contentOptions' =>['class' => 'table_class','style'=>'display:block;'],
@@ -58,6 +89,14 @@ $this->params['breadcrumbs'][] = $this->title;
                     'name' => 'FundsSearch[date]',
                     'mask' => '99.99.9999',
                     ]),
+                'filterType' => GridView::FILTER_DATE,
+                'filterWidgetOptions' => [
+                    'pluginOptions' => [
+                        'format' => 'dd.mm.yyyy',
+                        'todayHighlight' => true
+                    ]
+                ],
+                'width' => '200px',
             ],
             // 'cr_time',
             // 'up_time',
@@ -71,7 +110,6 @@ $this->params['breadcrumbs'][] = $this->title;
             '{export}',
         ],
         'responsive' => true,
-        'floatHeader' => true,
         'panel' => [
             'type' => GridView::TYPE_DEFAULT,
             'heading'=>'<h3 class="panel-title"><i class="glyphicon glyphicon-globe"></i> Расходы/доходы</h3>',
