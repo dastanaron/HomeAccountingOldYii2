@@ -32,11 +32,11 @@ if(!empty($model->date)) {
 
     <?= $form->field($model, 'bill_id')->widget(Select2::className(), [
             'data' => SelectBills::getBillsByUserArray(),
-            'options' => ['placeholder' => 'Выберите счет'],
+            'options' => ['placeholder' => 'Выберите счет', 'required' => true,],
             'pluginOptions' => [
-                'allowClear' => true
+                'allowClear' => true,
             ],
-    ]);?>
+    ])->label('Счёт (обязательно к заполнению)');?>
 
     <?= $form->field($model, 'category')->listBox(Funds::CategoriesList(),['size' => 1]) ?>
 
