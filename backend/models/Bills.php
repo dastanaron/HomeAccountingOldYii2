@@ -31,7 +31,6 @@ class Bills extends ActiveRecord
         parent::__construct($config);
 
         $this->balance_id = $this->getBalanceId();
-
     }
 
     /**
@@ -40,7 +39,7 @@ class Bills extends ActiveRecord
     private function getBalanceId()
     {
         $user = Yii::$app->user->identity->getId();
-        $balance = Balance::find(['id' => $user])->one();
+        $balance = Balance::find()->where(['user_id' => $user])->one();
         return $balance->id;
     }
 

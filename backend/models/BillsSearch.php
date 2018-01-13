@@ -61,7 +61,6 @@ class BillsSearch extends Bills
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'balance_id' => $this->balance_id,
             'sum' => $this->sum,
             'deadline' => $this->deadline,
             'created_at' => $this->created_at,
