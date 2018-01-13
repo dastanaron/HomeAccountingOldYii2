@@ -53,7 +53,8 @@
                 "mobile-first",
                 "responsive",
                 "web"
-            ]
+            ],
+            "time": "2016-07-25T15:51:55+00:00"
         },
         {
             "name": "bower-asset/bootstrap3-dialog",
@@ -106,7 +107,8 @@
                 "mobile-first",
                 "responsive",
                 "web"
-            ]
+            ],
+            "time": "2017-03-24T01:21:30+00:00"
         },
         {
             "name": "bower-asset/inputmask",
@@ -165,7 +167,8 @@
                 "jquery",
                 "mask",
                 "plugins"
-            ]
+            ],
+            "time": "2017-11-21T11:46:23+00:00"
         },
         {
             "name": "bower-asset/jquery",
@@ -196,7 +199,8 @@
                 "javascript",
                 "jquery",
                 "library"
-            ]
+            ],
+            "time": "2017-03-20T19:02:00+00:00"
         },
         {
             "name": "bower-asset/punycode",
@@ -224,7 +228,8 @@
                     "node_modules",
                     "package.json"
                 ]
-            }
+            },
+            "time": "2014-10-22T12:02:42+00:00"
         },
         {
             "name": "bower-asset/yii2-pjax",
@@ -258,7 +263,8 @@
             },
             "license": [
                 "MIT"
-            ]
+            ],
+            "time": "2017-10-12T10:11:14+00:00"
         },
         {
             "name": "cebe/markdown",
@@ -326,12 +332,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/dastanaron/yii2-migrate-updater.git",
-                "reference": "0fc960392bfcafa1547f31daefefacdb3c1ea017"
+                "reference": "e8d5e63df2a683f0aa89ddbf1762eddbb6624e17"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/dastanaron/yii2-migrate-updater/zipball/0fc960392bfcafa1547f31daefefacdb3c1ea017",
-                "reference": "0fc960392bfcafa1547f31daefefacdb3c1ea017",
+                "url": "https://api.github.com/repos/dastanaron/yii2-migrate-updater/zipball/e8d5e63df2a683f0aa89ddbf1762eddbb6624e17",
+                "reference": "e8d5e63df2a683f0aa89ddbf1762eddbb6624e17",
                 "shasum": ""
             },
             "require": {
@@ -361,7 +367,7 @@
                 "extension",
                 "yii2"
             ],
-            "time": "2018-01-11 12:47:04"
+            "time": "2018-01-12T08:21:56+00:00"
         },
         {
             "name": "ezyang/htmlpurifier",
@@ -513,7 +519,7 @@
                 "widget",
                 "yii2"
             ],
-            "time": "2018-01-08 11:00:44"
+            "time": "2018-01-08T11:00:44+00:00"
         },
         {
             "name": "kartik-v/yii2-krajee-base",
@@ -618,7 +624,7 @@
                 "widget",
                 "yii2"
             ],
-            "time": "2017-09-06 06:18:08"
+            "time": "2017-09-06T06:18:08+00:00"
         },
         {
             "name": "kartik-v/yii2-widget-datetimepicker",
@@ -667,7 +673,7 @@
                 "widget",
                 "yii2"
             ],
-            "time": "2017-07-18 08:42:00"
+            "time": "2017-07-18T08:42:00+00:00"
         },
         {
             "name": "kartik-v/yii2-widget-select2",
@@ -720,7 +726,7 @@
                 "widget",
                 "yii2"
             ],
-            "time": "2017-12-03 08:02:21"
+            "time": "2017-12-03T08:02:21+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",
@@ -1108,7 +1114,8 @@
             "type": "bower-asset-library",
             "extra": {
                 "bower-asset-main": "dist/typeahead.bundle.js"
-            }
+            },
+            "time": "2015-04-27T04:02:14+00:00"
         },
         {
             "name": "codeception/base",
@@ -2298,16 +2305,16 @@
         },
         {
             "name": "sebastian/comparator",
-            "version": "2.1.1",
+            "version": "2.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/comparator.git",
-                "reference": "b11c729f95109b56a0fe9650c6a63a0fcd8c439f"
+                "reference": "11c07feade1d65453e06df3b3b90171d6d982087"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/comparator/zipball/b11c729f95109b56a0fe9650c6a63a0fcd8c439f",
-                "reference": "b11c729f95109b56a0fe9650c6a63a0fcd8c439f",
+                "url": "https://api.github.com/repos/sebastianbergmann/comparator/zipball/11c07feade1d65453e06df3b3b90171d6d982087",
+                "reference": "11c07feade1d65453e06df3b3b90171d6d982087",
                 "shasum": ""
             },
             "require": {
@@ -2358,7 +2365,7 @@
                 "compare",
                 "equality"
             ],
-            "time": "2017-12-22T14:50:35+00:00"
+            "time": "2018-01-12T06:34:42+00:00"
         },
         {
             "name": "sebastian/diff",

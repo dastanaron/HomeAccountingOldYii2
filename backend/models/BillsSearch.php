@@ -6,6 +6,7 @@ use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use backend\models\Bills;
+use yii\db\Query;
 
 /**
  * BillsSearch represents the model behind the search form of `backend\models\Bills`.
@@ -41,9 +42,11 @@ class BillsSearch extends Bills
      */
     public function search($params)
     {
-        $query = Bills::find();
-
-        // add conditions that should always apply here
+        $query = (new Query())
+            ->select(['bills.*'])
+            ->from('bills')
+            ->leftJoin('balance', 'bills.balance_id=balance.id')
+            ->where(['balance.user_id' => Yii::$app->user->identity->getId()]);
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
@@ -52,8 +55,6 @@ class BillsSearch extends Bills
         $this->load($params);
 
         if (!$this->validate()) {
-            // uncomment the following line if you do not want to return any records when validation fails
-            // $query->where('0=1');
             return $dataProvider;
         }
 

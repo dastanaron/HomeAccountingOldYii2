@@ -34,7 +34,32 @@ $this->params['breadcrumbs'][] = $this->title;
             'created_at',
             'updated_at',
 
-            ['class' => 'yii\grid\ActionColumn'],
+            [
+                'class' => 'yii\grid\ActionColumn',
+                'template' => '{view} {update} {delete}',
+                'buttons' => [
+                    'view' => function ($url, $model) {
+                        return Html::a('<span class="glyphicon glyphicon-eye-open"></span>', '/bills/view?id='.$model['id']);
+                    },
+                    'update' => function ($url,$model) {
+                        return Html::a(
+                            '<span class="glyphicon glyphicon-pencil"></span>',
+                            '/bills/update?id='.$model['id']);
+                    },
+                    'delete' => function ($url,$model,$key) {
+                        return Html::a(
+                            '<span class="glyphicon glyphicon-trash"></span>',
+                            '/bills/delete?id='.$model['id'],
+                            [
+                                'data' => [
+                                    'confirm' => 'Вы действительно хотите удалить элемент?',
+                                    'method' => 'post',
+                                ],
+                            ]
+                        );
+                    },
+                ],
+            ],
         ],
     ]); ?>
 </div>
