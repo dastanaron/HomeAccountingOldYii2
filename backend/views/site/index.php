@@ -8,15 +8,20 @@ $this->title = 'Личная программа для разаработок';
 <div class="container">
 
     <div class="row">
-        <div class="col-sm-4">
+
+        <div class="col-sm-3 form-group">
+            <a href="/bills" class="btn btn-info center-block">Управление счетами</a>
+        </div>
+
+        <div class="col-sm-3 form-group">
             <a href="/funds" class="btn btn-info center-block">Движение денежных средств</a>
         </div>
 
-        <div class="col-sm-4">
+        <div class="col-sm-3 form-group">
             <a href="/events" class="btn btn-info center-block">Напоминания</a>
         </div>
 
-        <div class="col-sm-4">
+        <div class="col-sm-3 form-group">
             <a href="/" class="btn btn-info center-block">в разработке</a>
         </div>
     </div>
