@@ -72,6 +72,13 @@ class FundsController extends Controller
      */
     public function actionCalculates()
     {
+
+        if(Yii::$app->user->identity->getId() !== 1)
+        {
+            Yii::$app->session->setFlash('error', "Извините, раздел временно не доступен");
+            return $this->redirect('/funds');
+        }
+
         $FilterModel = new FundsFilter();
         $dataProvider = $FilterModel->search(Yii::$app->request->post());
 

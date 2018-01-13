@@ -20,7 +20,7 @@ class FundsCalculator
 
         $balance = Balance::findOne(['user_id' =>  Yii::$app->user->getId()]);
 
-        $bills = Bills::find(['balance_id' => $balance->id])->all();
+        $bills = Bills::find()->where(['balance_id' => $balance->id])->all();
 
         $total_sum = 0;
 
