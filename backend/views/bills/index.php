@@ -1,7 +1,7 @@
 <?php
 
 use yii\helpers\Html;
-use yii\grid\GridView;
+use kartik\grid\GridView;
 
 /* @var $this yii\web\View */
 /* @var $searchModel backend\models\BillsSearch */
@@ -23,16 +23,22 @@ $this->params['breadcrumbs'][] = $this->title;
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
-            'name',
-            'sum',
+            ['class' => 'kartik\grid\SerialColumn',],
+            [
+                'attribute' => 'name',
+                'pageSummary' => 'Итоги',
+            ],
+            [
+                'attribute' => 'sum',
+                'pageSummary' => true
+            ],
             'deadline',
             'comment',
             'created_at',
             'updated_at',
 
             [
-                'class' => 'yii\grid\ActionColumn',
+                'class' => 'kartik\grid\ActionColumn',
                 'template' => '{view} {update} {delete}',
                 'buttons' => [
                     'view' => function ($url, $model) {
@@ -58,5 +64,21 @@ $this->params['breadcrumbs'][] = $this->title;
                 ],
             ],
         ],
+        'showPageSummary' => true,
+        'toolbar' =>  [
+            ['content'=>
+                Html::a('<i class="glyphicon glyphicon-plus"></i>', ['create'], ['data-pjax'=>0, 'class' => 'btn btn-default', 'title'=> 'Новый счет'])
+            ],
+            '{export}',
+            '{toggleData}',
+        ],
+        'responsive' => true,
+        'panel' => [
+            'type' => GridView::TYPE_DEFAULT,
+            'heading'=>'<h3 class="panel-title"><i class="glyphicon glyphicon-globe"></i> Счета</h3>',
+            'after'=>Html::a('<i class="glyphicon glyphicon-repeat"></i> Сбросить фильтр', ['index'], ['class' => 'btn btn-info']),
+            'footer'=>false
+        ],
+        'exportContainer' => ['class' => 'btn-group-md'],
     ]); ?>
 </div>
