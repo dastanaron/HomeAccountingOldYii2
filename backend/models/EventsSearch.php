@@ -41,7 +41,7 @@ class EventsSearch extends Events
      */
     public function search($params)
     {
-        $query = Events::find();
+        $query = Events::find()->where(['user_id' => Yii::$app->user->identity->getId()]);
 
         // add conditions that should always apply here
 
