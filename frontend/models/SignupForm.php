@@ -12,6 +12,7 @@ class SignupForm extends Model
     public $username;
     public $email;
     public $password;
+    public $user_id;
 
 
     /**
@@ -52,8 +53,12 @@ class SignupForm extends Model
         $user->email = $this->email;
         $user->setPassword($this->password);
         $user->generateAuthKey();
-        
-        return $user->save() ? $user : null;
+
+        $return = $user->save() ? $user : null;
+
+        $this->user_id = $user->id;
+
+        return $return;
     }
 
     public function attributeLabels()

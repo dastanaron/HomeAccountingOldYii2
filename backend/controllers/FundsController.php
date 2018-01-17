@@ -69,41 +69,13 @@ class FundsController extends Controller
 
     /**
      * @return string
-     */
-    public function actionCalculates()
-    {
-
-        if(Yii::$app->user->identity->getId() !== 1)
-        {
-            Yii::$app->session->setFlash('error', "Извините, раздел временно не доступен");
-            return $this->redirect('/funds');
-        }
-
-        $FilterModel = new FundsFilter();
-        $dataProvider = $FilterModel->search(Yii::$app->request->post());
-
-        return $this->render('calculates', [
-            'FilterModel' =>  $FilterModel,
-            'dataProvider' => $dataProvider,
-            'balance' => $this->getBalanceModel(),
-            'params' => Yii::$app->request->post(),
-        ]);
-    }
-
-    /**
-     * @return string
+     * @throws \Exception
      */
     public function actionBalance() {
 
+        FundsCalculator::CalculateBalance();
+
         $model = $this->getBalanceModel();
-
-        if (!is_object($model)){
-            $model = new Balance();
-        }
-
-        if ($model->load(Yii::$app->request->post())) {
-            FundsCalculator::CalculateBalance();
-        }
 
         return $this->render('balance', [
             'model' => $model,
@@ -239,7 +211,8 @@ class FundsController extends Controller
     }
 
     /**
-     * @return null|string|static|Balance
+     * @return null|static|Balance
+     * @throws \Exception
      */
     protected function getBalanceModel() {
 
@@ -251,7 +224,7 @@ class FundsController extends Controller
 
         }
         else {
-            return 'Нет данных';
+            throw new \Exception('not created balance row');
         }
 
     }

@@ -30,7 +30,6 @@ $tools = '<div class="tools">'.
 
     <p>
         <?= Html::a('Создать запись', ['create'], ['class' => 'btn btn-success']) ?>
-        <?= Html::a('Рассчеты (deprecated)', ['calculates'], ['class' => 'btn btn-danger']) ?>
         <?= Html::a('Текущий баланс', ['balance'], ['class' => 'btn btn-primary']) ?>
     </p>
 
