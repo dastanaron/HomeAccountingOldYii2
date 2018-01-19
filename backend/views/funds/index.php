@@ -42,6 +42,8 @@ $tools = '<div class="tools">'.
         'id' => 'arrival_or_expense',
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
+        'pjax' => true,
+        'toggleDataOptions' => ['minCount' => 10],
         'columns' => [
             [
                 'class' => 'kartik\grid\SerialColumn',
@@ -124,7 +126,7 @@ $tools = '<div class="tools">'.
         'showPageSummary' => true,
         'toolbar' =>  [
             ['content'=>
-                Html::a('<i class="glyphicon glyphicon-plus"></i>', ['create'], ['data-pjax'=>0, 'class' => 'btn btn-default', 'title'=> 'новая запись'])
+                Html::a('<i class="glyphicon glyphicon-repeat"></i>', ['index'], ['class' => 'btn btn-info']).Html::a('<i class="glyphicon glyphicon-plus"></i>', ['create'], ['data-pjax'=>0, 'class' => 'btn btn-default', 'title'=> 'новая запись'])
             ],
             '{export}',
             '{toggleData}',
@@ -134,7 +136,7 @@ $tools = '<div class="tools">'.
             'type' => GridView::TYPE_DEFAULT,
             'heading'=>'<h3 class="panel-title"><i class="glyphicon glyphicon-globe"></i> Расходы/доходы</h3>',
             'after'=> $tools,
-            'footer'=>false
+            //'footer'=>false
         ],
         'exportContainer' => ['class' => 'btn-group-md'],
     ]); ?>
