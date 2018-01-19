@@ -39,7 +39,7 @@ class Funds extends \yii\db\ActiveRecord
             [['arrival_or_expense', 'category', 'user_id'], 'integer'],
             [['cr_time', 'up_time'], 'safe'],
             [['cause'], 'string', 'max' => 200],
-            [['sum'], 'integer'],
+            [['sum'], 'integer', 'max'=>11],
             [['bill_id'], 'integer', 'max' => 11],
         ];
     }
