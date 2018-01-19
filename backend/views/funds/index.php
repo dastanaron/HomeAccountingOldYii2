@@ -5,6 +5,7 @@ use kartik\grid\GridView;
 use backend\models\Funds;
 use yii\widgets\MaskedInput;
 use backend\components\Bills\SelectBills;
+use backend\assets\CalculateAsset;
 
 /* @var $this yii\web\View */
 /* @var $searchModel backend\models\FundsSearch */
@@ -13,15 +14,7 @@ use backend\components\Bills\SelectBills;
 $this->title = 'Движение денежных средств';
 $this->params['breadcrumbs'][] = $this->title;
 
-$tools = '<div class="tools">'.
-        '<div class="tool form-group">'.
-            Html::a('<i class="glyphicon glyphicon-repeat"></i> Сбросить фильтр', ['index'], ['class' => 'btn btn-info']) .
-        '</div>'.
-        '<div class="tool form-group">'.
-            Html::button('Посчитать выбранные', ['id' => 'calc_selected', 'class'=>'btn btn-success']).
-            '<div id="check_selected"></div>'.
-        "</div>".
-    "</div>";
+CalculateAsset::register($this);
 
 ?>
 <div class="funds-index">
@@ -126,7 +119,7 @@ $tools = '<div class="tools">'.
         'showPageSummary' => true,
         'toolbar' =>  [
             ['content'=>
-                Html::a('<i class="glyphicon glyphicon-repeat"></i>', ['index'], ['class' => 'btn btn-info']).Html::a('<i class="glyphicon glyphicon-plus"></i>', ['create'], ['data-pjax'=>0, 'class' => 'btn btn-default', 'title'=> 'новая запись'])
+                Html::button('<i class="glyphicon glyphicon-equalizer"></i>', ['id' => 'calc_selected', 'class'=>'btn btn-success', 'title'=>'']).Html::a('<i class="glyphicon glyphicon-repeat"></i>', ['index'], ['class' => 'btn btn-info', 'title' => 'сбросить фильтр']).Html::a('<i class="glyphicon glyphicon-plus"></i>', ['create'], ['data-pjax'=>0, 'class' => 'btn btn-default', 'title'=> 'новая запись'])
             ],
             '{export}',
             '{toggleData}',
@@ -135,8 +128,8 @@ $tools = '<div class="tools">'.
         'panel' => [
             'type' => GridView::TYPE_DEFAULT,
             'heading'=>'<h3 class="panel-title"><i class="glyphicon glyphicon-globe"></i> Расходы/доходы</h3>',
-            'after'=> $tools,
-            //'footer'=>false
+            'before' => '<div id="check_selected"></div>',
+            'after' => false,
         ],
         'exportContainer' => ['class' => 'btn-group-md'],
     ]); ?>
@@ -146,32 +139,3 @@ $tools = '<div class="tools">'.
         </div>
     </div>
 </div>
-<?php
-
-$js = <<<JS
-$(document).ready(function () {
-    $('button#calc_selected').click(function () {
-        var keys = $('#arrival_or_expense').yiiGridView('getSelectedRows');
-        
-        if(keys == '' || keys == []) {
-            $('#check_selected').html('');
-            alert('ничего не выбрано');
-            return ;
-        }
-        console.log(keys);
-        
-        var sum = 0;
-        
-        $.each(keys, function (index, value) {
-            sum += parseInt($('#arrival_or_expense').find('table').find('tr[data-key='+value+']').children('td[data-col-seq=4]').html());
-        });
-        
-        console.log(sum);
-        $('#check_selected').html('Сумма выбранных: <span class="calc_value">' + sum + '</span>');
-    });
-});
-
-
-JS;
-
-$this->registerJs($js, \yii\web\View::POS_END);
