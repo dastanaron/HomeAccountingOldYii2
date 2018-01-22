@@ -8,7 +8,7 @@ use common\models\User;
 use common\components\ValidPassword;
 use common\components\BotScenario\BotScenario;
 use backend\models\Funds;
-use backend\models\CurrentBalance;
+use backend\models\Balance;
 
 
 //Yii::$app->response->format = Response::FORMAT_JSON; // На случай json вывода
@@ -41,7 +41,7 @@ if (!empty($request)) {
         //модель расчетов
         $funds_model = new Funds();
         //модель баланса
-        $balance_model = new CurrentBalance();
+        $balance_model = new Balance();
 
         if (preg_match('#Помощь#', $request_array['object']['body'])) {
 
@@ -89,8 +89,6 @@ if (!empty($request)) {
             if(!empty($user)) {
 
                 $balance = $balance_model->findOne(['user_id'=>$user->id]);
-                VarDumper::dump($request_array['object'], 10, true);
-                //BotScenario::CurrentBalance($request_array['object']['user_id'], $balance->total_summ);
             }
             else {
                 BotScenario::UserNotFound($request_array['object']['user_id']);
@@ -107,7 +105,7 @@ if (!empty($request)) {
 
                 $categories = '';
 
-                $sort_categories = Funds::СategoriesList();
+                $sort_categories = Funds::CategoriesList();
 
                 sort($sort_categories);
 
@@ -136,10 +134,10 @@ if (!empty($request)) {
                 //Ищем категорию сначала в выражении потом в массиве
                 preg_match('#Расход (.*)#', $request_array['object']['body'], $match);
 
-                $category = array_search($match[1], Funds::СategoriesList());
+                $category = array_search($match[1], Funds::CategoriesList());
 
                 //Получаем название категории
-                $categoryname = Funds::СategoriesList()[$category];
+                $categoryname = Funds::CategoriesList()[$category];
 
                 //Получаем дату начала месяца
                 $date_month_start = new \DateTime(date('Y-m-01'));
