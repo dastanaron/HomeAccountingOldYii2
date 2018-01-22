@@ -52,8 +52,8 @@ class FundsController extends Controller
     }
 
     /**
-     * Lists all Funds models.
-     * @return mixed
+     * @return string
+     * @throws \Exception
      */
     public function actionIndex()
     {
@@ -178,6 +178,50 @@ class FundsController extends Controller
 
         $model->delete();
         return $this->redirect(['index']);
+    }
+
+    /**
+     * @return bool
+     * @throws NotFoundHttpException
+     * @throws \Exception
+     */
+    public function actionTransfer()
+    {
+        //Функция переброса со счета на счет
+
+        $billFrom = Yii::$app->request->get('billFrom');
+        $billTo = Yii::$app->request->get('billTo');
+        $comment = Yii::$app->request->get('transferComment');
+        $sum = Yii::$app->request->get('transferSum');
+
+        /**
+         * Логика следующая:
+         * Берем счет с которого снимаем, пересчитываем этот счет, без указания расхода. ЛОжим на новый счет, с указанимем
+         * дохода и комментарием, указывая, с какого счета, и пересчитываем этот счет
+         */
+
+        $billFromModel = $this->findBill($billFrom);
+
+        FundsCalculator::calculateBill($billFromModel, $sum, 2);
+
+        $fundsModel = new Funds();
+
+        $fundsModel->bill_id = $billTo;
+        $fundsModel->user_id = Yii::$app->user->identity->getId();
+        $fundsModel->date = time();
+        $fundsModel->cr_time = time();
+        $fundsModel->category = 13;
+        $fundsModel->sum = $sum;
+        $fundsModel->cause = 'Перевод со счета: ' . $billFrom . ' [' . $comment . ']';
+
+
+
+        $billToModel = $this->findBill($billTo);
+
+        FundsCalculator::calculateBill($billToModel, $sum, 1);
+
+        return $fundsModel->save();
+
     }
 
     /**
