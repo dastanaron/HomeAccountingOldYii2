@@ -16,6 +16,8 @@ use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use backend\models\Bills;
 use backend\components\Calculators\FundsCalculator;
+use backend\components\Bills\SelectBills;
+
 /**
  * FundsController implements the CRUD actions for Funds model.
  */
@@ -36,7 +38,7 @@ class FundsController extends Controller
                         'allow' => true,
                     ],
                     [
-                        'actions' => ['logout', 'index', 'view', 'create', 'update', 'delete', 'calculates', 'balance'],
+                        'actions' => ['logout', 'index', 'view', 'create', 'update', 'delete', 'calculates', 'balance', 'transfer'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -181,7 +183,7 @@ class FundsController extends Controller
     }
 
     /**
-     * @return bool
+     * @return \yii\web\Response
      * @throws NotFoundHttpException
      * @throws \Exception
      */
@@ -189,10 +191,10 @@ class FundsController extends Controller
     {
         //Функция переброса со счета на счет
 
-        $billFrom = Yii::$app->request->get('billFrom');
-        $billTo = Yii::$app->request->get('billTo');
-        $comment = Yii::$app->request->get('transferComment');
-        $sum = Yii::$app->request->get('transferSum');
+        $billFrom = Yii::$app->request->post('billFrom');
+        $billTo = Yii::$app->request->post('billTo');
+        $comment = Yii::$app->request->post('transferComment');
+        $sum = Yii::$app->request->post('transferSum');
 
         /**
          * Логика следующая:
@@ -208,19 +210,24 @@ class FundsController extends Controller
 
         $fundsModel->bill_id = $billTo;
         $fundsModel->user_id = Yii::$app->user->identity->getId();
+        $fundsModel->arrival_or_expense = 1;
         $fundsModel->date = time();
-        $fundsModel->cr_time = time();
+        $fundsModel->cr_time = Yii::$app->formatter->asDatetime(time(), 'php: Y-m-d H:i:s');
         $fundsModel->category = 13;
         $fundsModel->sum = $sum;
-        $fundsModel->cause = 'Перевод со счета: ' . $billFrom . ' [' . $comment . ']';
-
-
+        $fundsModel->cause = 'Перевод со счета: ' . SelectBills::getBillsByUserArray()[$billFrom] . ' [' . $comment . ']';
 
         $billToModel = $this->findBill($billTo);
 
         FundsCalculator::calculateBill($billToModel, $sum, 1);
 
-        return $fundsModel->save();
+        if ($fundsModel->save()) {
+            return $this->redirect('/bills/index');
+        }
+        else {
+            Yii::$app->session->setFlash('warning', 'Ошибка записи прихода');
+            return $this->redirect('index');
+        }
 
     }
 

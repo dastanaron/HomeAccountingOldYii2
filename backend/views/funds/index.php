@@ -6,6 +6,9 @@ use backend\models\Funds;
 use yii\widgets\MaskedInput;
 use backend\components\Bills\SelectBills;
 use backend\assets\CalculateAsset;
+use yii\bootstrap\Modal;
+use yii\widgets\ActiveForm;
+use kartik\select2\Select2;
 
 /* @var $this yii\web\View */
 /* @var $searchModel backend\models\FundsSearch */
@@ -119,7 +122,7 @@ CalculateAsset::register($this);
         'showPageSummary' => true,
         'toolbar' =>  [
             ['content'=>
-                Html::button('<i class="glyphicon glyphicon-equalizer"></i>', ['id' => 'calc_selected', 'class'=>'btn btn-success', 'title'=>'']).Html::a('<i class="glyphicon glyphicon-repeat"></i>', ['index'], ['class' => 'btn btn-info', 'title' => 'сбросить фильтр']).Html::a('<i class="glyphicon glyphicon-plus"></i>', ['create'], ['data-pjax'=>0, 'class' => 'btn btn-default', 'title'=> 'новая запись'])
+               Html::button('<span class="glyphicon glyphicon-transfer"></span>', ['data-toggle' => 'modal', 'data-target' => '#transfer-modal', 'class' => 'btn btn-warning', 'title' => 'перевод со счета на счет']). Html::button('<i class="glyphicon glyphicon-equalizer"></i>', ['id' => 'calc_selected', 'class'=>'btn btn-success', 'title'=>'']).Html::a('<i class="glyphicon glyphicon-repeat"></i>', ['index'], ['class' => 'btn btn-info', 'title' => 'сбросить фильтр']).Html::a('<i class="glyphicon glyphicon-plus"></i>', ['create'], ['data-pjax'=>0, 'class' => 'btn btn-default', 'title'=> 'новая запись'])
             ],
             '{export}',
             '{toggleData}',
@@ -139,3 +142,59 @@ CalculateAsset::register($this);
         </div>
     </div>
 </div>
+
+<?php
+
+Modal::begin([
+    'id' => 'transfer-modal',
+    'header' => '<h2>Перевод счета</h2>',
+]);?>
+
+    <p>
+        Выберите счет с которого списать, и на который перевести
+    </p>
+
+<?php
+ $form = ActiveForm::begin([
+         'action' => 'funds/transfer',
+         'method' => 'POST',
+ ]);?>
+
+   <div class="form-group">
+       <?=Select2::widget([
+            'name' => 'billFrom',
+            'value' => null,
+            'data' => SelectBills::getBillsByUserArray(),
+            'options' => ['placeholder' => 'Выберите счет с которого списать'],
+            'pluginOptions' => [
+                'allowClear' => true
+            ],
+        ]);?>
+   </div>
+
+    <div class="form-group">
+        <?=Select2::widget([
+            'name' => 'billTo',
+            'data' => SelectBills::getBillsByUserArray(),
+            'value' => null,
+            'options' => [
+                'placeholder' => 'Выберите счет на который записать',
+            ]
+        ]);?>
+    </div>
+
+    <div class="form-group">
+        <?=Html::textInput('transferSum', '', ['placeholder' => 'Введите сумму', 'class' => 'form-control']);?>
+    </div>
+
+    <div class="form-group">
+        <?=Html::textInput('transferComment', '', ['placeholder' => 'Комментарий', 'class' => 'form-control']);?>
+    </div>
+
+    <div class="form-group">
+        <?= Html::submitButton('Отправить', ['class' => 'btn btn-success']) ?>
+    </div>
+
+<?php ActiveForm::end();
+
+Modal::end();
