@@ -31,7 +31,7 @@ composer update
 или, можно поставить проект через композер и миновать вышеперечисленные пункты
 
 ```
-composer create-project:1.0.1 homeAccounting.loc
+composer create-project dastanaron/homeaccounting:1.0.1 homeAccounting.loc
 
 ```
 Вместо указанной версии, можно указать имеющуюся на текущий момент, и композер сам поставит проект
