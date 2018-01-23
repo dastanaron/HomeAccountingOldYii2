@@ -2,6 +2,10 @@
 
 namespace common\components\vkAPI;
 
+/**
+ * Class AuthorizeVK
+ * @package common\components\vkAPI
+ */
 class AuthorizeVK {
 
     protected $client_id;
@@ -10,7 +14,13 @@ class AuthorizeVK {
     protected $version;
     public $url;
 
-
+    /**
+     * AuthorizeVK constructor.
+     * @param $client_id
+     * @param $groups_id
+     * @param $redirect_uri
+     * @param string $version
+     */
     public function __construct($client_id, $groups_id, $redirect_uri, $version = '5.67')
     {
         $this->client_id = $client_id;
@@ -20,16 +30,26 @@ class AuthorizeVK {
         $this->url = 'https://oauth.vk.com/authorize?client_id='.$this->client_id.'&groups_ids='.$this->groups_id.'&display=page&redirect_uri='.$this->redirect_uri.'&scope=messages&response_type=code&v='.$this->version.'';
     }
 
+    /**
+     * @param $secret_key
+     * @param $code
+     */
     public function BuildRequestAccessTocken($secret_key, $code)
     {
         $this->url = 'https://oauth.vk.com/access_token?client_id='.$this->client_id.'&client_secret='.$secret_key.'&redirect_uri='.$this->redirect_uri.'&code='.$code.'';
     }
 
+    /**
+     * @return string
+     */
     public function getUrl()
     {
         return $this->url;
     }
 
+    /**
+     * @return mixed
+     */
     public function exec()
     {
 

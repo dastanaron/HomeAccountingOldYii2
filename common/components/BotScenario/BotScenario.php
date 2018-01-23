@@ -8,6 +8,8 @@ use common\components\Logger\Logger;
 class BotScenario {
 
     public static $peer;
+
+    /**@var ApiMethods*/
     public static $vk_api;
 
     /**

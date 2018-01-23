@@ -2,19 +2,36 @@
 
 namespace common\components\vkAPI;
 
+/**
+ * Class ApiMethods
+ * @package common\components\vkAPI
+ */
 class ApiMethods{
 
-    protected $usertocken = 0;
+    /**
+     * @var string
+     */
+    protected $userToken = '';
+    /**
+     * @var string
+     */
     protected $api = 'https://api.vk.com/method/';
+    /**
+     * @var mixed
+     */
     protected $error;
 
-    function __construct($usertocken)
+    /**
+     * ApiMethods constructor.
+     * @param $userToken
+     */
+    function __construct($userToken)
     {
-        $this->usertocken = $usertocken;
+        $this->userToken = $userToken;
     }
 
-    /*
-     * Сюда методы из АПИ ВК
+    /**
+     * @return $this
      */
     public function getProfileInfo()
     {
@@ -22,22 +39,43 @@ class ApiMethods{
         return $this;
     }
 
+    /**
+     * @return $this
+     */
     public function AccountSetOnline()
     {
         $this->api .= 'account.setOnline?voip=0';
         return $this;
     }
 
-    public function SendMessageUser($userid, $message, $peer_id)
+    /**
+     * @param $userid
+     * @param $message
+     * @param $peer_id
+     * @param bool $repeat
+     * @return $this
+     */
+    public function SendMessageUser($userid, $message, $peer_id, $repeat = false)
     {
         if (empty($peer_id)) {
             $peer_id = $userid;
         }
-        $random_id = crc32($userid .$message);
-        $this->api .= 'messages.send?user_id='.$userid.'&peer_id='.$peer_id.'&message='.urlencode($message).''; //&random_id='.$random_id.'
+
+        $this->api .= 'messages.send?user_id='.$userid.'&peer_id='.$peer_id.'&message='.urlencode($message).'';
+
+        if($repeat === true) {
+            $random_id = crc32($userid .$message);
+
+            $this->api .= '&random_id='.$random_id.'';
+        }
+
         return $this;
     }
 
+    /**
+     * @param bool $response
+     * @return bool|mixed
+     */
     public function APIExecute($response = true)
     {
         if ($this->addAccessTocken() && $this->addVersionApi()) {
@@ -48,7 +86,6 @@ class ApiMethods{
             else {
                 return json_decode($this->CURLExec(), true);
             }
-            //return $this->api;
         }
         else {
             $this->error = 'Ошибка запроса не добавлены обязательные свойства запроса';
@@ -56,30 +93,38 @@ class ApiMethods{
         }
     }
 
+    /**
+     * @param int $time_offset
+     * @return $this
+     */
     public function getMessage($time_offset = 60)
     {
         $this->api .= 'messages.get?time_offset='.$time_offset.'';
         return $this;
     }
 
+    /**
+     * @param $users_id
+     * @return $this
+     */
     public function getUsers($users_id)
     {
         $this->api .= 'users.get?user_ids='.$users_id.'';
         return $this;
     }
 
-    /*
-     * Сервисные функции для обязательных полей запроса
+    /**
+     * @return bool
      */
     protected function addAccessTocken()
     {
         if (preg_match('#method/(.+)#', $this->api)){
 
             if (preg_match('#\?#', $this->api)) {
-                $this->api .= '&access_token='.$this->usertocken;
+                $this->api .= '&access_token='.$this->userToken;
             }
             else {
-                $this->api .= '?access_token='.$this->usertocken;
+                $this->api .= '?access_token='.$this->userToken;
             }
             return true;
 
@@ -90,12 +135,18 @@ class ApiMethods{
         }
     }
 
+    /**
+     * @return bool
+     */
     protected function addVersionApi()
     {
         $this->api .= '&v=5.64';
         return true;
     }
 
+    /**
+     * @return mixed
+     */
     protected function CURLExec()
     {
 
@@ -126,16 +177,25 @@ class ApiMethods{
         }
     }
 
+    /**
+     * @return mixed
+     */
     public function getError()
     {
         return $this->error;
     }
 
+    /**
+     * @return string
+     */
     public function getAPI()
     {
         return $this->api;
     }
 
+    /**
+     * @return $this
+     */
     public function ClearAPI() {
         $this->api = 'https://api.vk.com/method/';
         return $this;

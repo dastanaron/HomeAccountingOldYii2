@@ -4,21 +4,15 @@ namespace common\components;
 
 use yii;
 
+/**
+ * Class ValidPassword
+ * @package common\components
+ */
 class ValidPassword {
 
     public static function ValidatePassword($password, $hash)
     {
-        //$hash = Yii::$app->getSecurity()->generatePasswordHash($password);
-
-        if (Yii::$app->getSecurity()->validatePassword($password, $hash)) {
-
-            return true;
-
-        } else {
-
-            return false;
-
-        }
+        return Yii::$app->getSecurity()->validatePassword($password, $hash);
     }
 
 }
