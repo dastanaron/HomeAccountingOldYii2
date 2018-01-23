@@ -13,6 +13,7 @@ API интерфейса, но руки пока не доходят. Можно
 
 Установка
 ==========================
+
 * Включаем плагин composer
 ```shell
 composer global require "fxp/composer-asset-plugin:^1.3.1"
@@ -26,6 +27,16 @@ git clone git@github.com:dastanaron/HomeAccounting.git
 cd HomeAccounting/
 composer update
 ```
+
+или, можно поставить проект через композер и миновать вышеперечисленные пункты
+
+```
+composer create-project:1.0.1 homeAccounting.loc
+
+```
+Вместо указанной версии, можно указать имеющуюся на текущий момент, и композер сам поставит проект
+и все зависимости. А далее потребуется настроить версию, подключить к базе и создать таблицы.
+
 
 * Генерируем файлы (в примере версия development)
 ```shell
