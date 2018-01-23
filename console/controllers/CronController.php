@@ -5,14 +5,19 @@ use yii\console\Controller;
 
 use common\components\vkAPI\ApiMethods;
 use common\components\Logger\Logger;
-use yii\helpers\VarDumper;
 use common\models\User;
-use backend\models\Funds;
 use backend\models\Events;
 
+/**
+ * Class CronController
+ * @package console\controllers
+ */
 class CronController extends Controller
 {
 
+    /**
+     *
+     */
     public function actionEvents()
     {
 
@@ -33,7 +38,7 @@ class CronController extends Controller
         //Объект АПИ ВК
         $vk_api = new ApiMethods($app_key);
 
-        Logger::Log('Заведены сновные данные');
+        Logger::Log('Заведены основные данные');
         //Ищем событие подходящее под условие
         $events =
             $model_events->find()
@@ -46,6 +51,8 @@ class CronController extends Controller
         //VarDumper::dump($events, 10, true);
 
         foreach ($events as $event) {
+
+            /**@var $event Events*/
 
             //Ищем юзера для уведомления
             $user = $model_users->findOne($event->user_id);
@@ -84,6 +91,13 @@ class CronController extends Controller
     }
 
 
+    /**
+     * @param ApiMethods $vk_api
+     * @param $vk_user_id
+     * @param $peer
+     * @param $message
+     * @return bool
+     */
     public function SendNotif($vk_api, $vk_user_id, $peer, $message)
     {
         $vk_api->SendMessageUser($vk_user_id, $message, $peer);
