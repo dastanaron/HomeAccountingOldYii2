@@ -73,6 +73,8 @@ class FundsSearch extends Funds
             'up_time' => $this->up_time,
         ]);
 
+        $query->andFilterWhere(['>=', 'date', $this->date]);
+
         $query->andFilterWhere(['>=', 'sum', (int)$this->sum]);
 
         $query->andFilterWhere(['like', 'cause', $this->cause]);

@@ -148,7 +148,7 @@ if (!empty($request)) {
 
                 foreach ($category_funds as $consumption){
 
-                    $sum += $consumption->summ;
+                    $sum += $consumption->sum;
 
                 }
 
