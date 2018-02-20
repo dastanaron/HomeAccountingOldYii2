@@ -67,7 +67,6 @@ class FundsSearch extends Funds
             'user_id' =>  Yii::$app->user->getId(),
             'arrival_or_expense' => $this->arrival_or_expense,
             'category' => $this->category,
-            'date' => $this->date,
             'bill_id' => $this->bill_id,
             'cr_time' => $this->cr_time,
             'up_time' => $this->up_time,
